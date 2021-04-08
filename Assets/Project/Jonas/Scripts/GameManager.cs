@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject PlayerPrefab;
-    public GameObject GameCanvas;
     public GameObject SceneCamera;
+
 
     private void Awake()
     {
-        GameCanvas.SetActive(true);
+        SpanwnPlayer();
     }
 
     public void SpanwnPlayer()
     {
-        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(0, 0), Quaternion.identity, 0);
-        GameCanvas.SetActive(false);
-        SceneCamera.SetActive(false);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(0, 0), Quaternion.identity, 0);
+            Debug.Log("Instanciei um player");
+            SceneCamera.SetActive(false);                
     }
 }
