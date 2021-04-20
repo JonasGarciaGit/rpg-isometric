@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public void SpanwnPlayer()
     {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(0, 0), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(0, 0, 57), Quaternion.identity, 0);
             Debug.Log("Instanciei um player");
             SceneCamera.SetActive(false);                
     }

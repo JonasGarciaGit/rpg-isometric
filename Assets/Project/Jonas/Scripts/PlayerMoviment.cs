@@ -50,7 +50,6 @@ public class PlayerMoviment : Photon.MonoBehaviour
             photonView.RPC("RotateTowardsMovementVector", PhotonTargets.AllBuffered, movementVector);
 
             PlayerRunning();
-
         }
 
     }
@@ -89,6 +88,5 @@ public class PlayerMoviment : Photon.MonoBehaviour
             animator.SetBool("isRunning", false);
         }
     }
-
 
 }
