@@ -37,8 +37,6 @@ public class RespawnEnemies : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(timer);
-
         if (monster == null)
         {
             timer += Time.deltaTime;

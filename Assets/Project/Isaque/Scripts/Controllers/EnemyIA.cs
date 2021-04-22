@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,9 +16,11 @@ public class EnemyIA : MonoBehaviour
     [SerializeField]
     private PhotonView photonView;
     
-
+    [SerializeField]
     Transform target;
     NavMeshAgent agent;
+    GameObject[] targets;
+    GameObject t;
 
     [SerializeField]
     private Animator animator;
@@ -30,7 +33,7 @@ public class EnemyIA : MonoBehaviour
     void Start()
     {
         startPosition = this.gameObject.transform.parent.gameObject.transform;
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         attackCooldown = 1f;
         isDie = false;
@@ -40,6 +43,14 @@ public class EnemyIA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        try
+        {
+            if(target == null)
+            {
+                seachTarget();
+            }
+
+        
 
         if (monsterHealth.currentHealth <= 0)
         {
@@ -56,6 +67,7 @@ public class EnemyIA : MonoBehaviour
         }
         if(distance > lookRadius)
         {
+            target = null;
             animator.SetBool("isWalking", true);
             agent.destination = startPosition.position;
             if (agent.velocity.sqrMagnitude == 0f)
@@ -92,6 +104,12 @@ public class EnemyIA : MonoBehaviour
             
         }
 
+        }
+        catch
+        {
+
+        }
+
     }
 
     void FaceTarget()
@@ -104,18 +122,25 @@ public class EnemyIA : MonoBehaviour
     [PunRPC]
     private void ChasePlayer(float distance)
     {
-
-        agent.SetDestination(target.position);
-
-        if (animator.GetBool("isWalking") == false)
+        try
         {
-            animator.SetBool("isWalking", true);
+            agent.SetDestination(target.position);
+
+            if (animator.GetBool("isWalking") == false)
+            {
+                animator.SetBool("isWalking", true);
+            }
+
+            if (distance <= agent.stoppingDistance)
+            {
+                FaceTarget();
+            }
+        }
+        catch
+        {
+            Debug.Log("Nenhum alvo encontrado!");
         }
 
-        if (distance <= agent.stoppingDistance)
-        {
-            FaceTarget();
-        }
     }
 
 
@@ -172,5 +197,10 @@ public class EnemyIA : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-
+    private void seachTarget()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Player");
+        t = targets.OrderBy(go => (this.transform.position - go.transform.position).sqrMagnitude).First();
+        target = t.transform;
+    }
 }

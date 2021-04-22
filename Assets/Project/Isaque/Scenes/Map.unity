@@ -29577,7 +29577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monster: {fileID: 0}
   respawn: {fileID: 0}
-  prefabMonster: {fileID: 7761919164195670978, guid: 4c742c0229976cc44ab5a8cc33442d83, type: 3}
+  prefabMonster: {fileID: 514770799963041236, guid: 397c1db476b4b6d40bef8a729b722354, type: 3}
   cooldown: 10
 --- !u!1001 &1051303522
 PrefabInstance:
