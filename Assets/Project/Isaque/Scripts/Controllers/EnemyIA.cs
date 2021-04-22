@@ -11,6 +11,9 @@ public class EnemyIA : MonoBehaviour
     public float atkRadius = 2f;
     private float attackCooldown;
     private bool isDie;
+
+    [SerializeField]
+    private PhotonView photonView;
     
 
     Transform target;
@@ -48,18 +51,7 @@ public class EnemyIA : MonoBehaviour
         
         if (distance <= lookRadius && distance > atkRadius && animator.GetBool("isAttkOne") == false && isDie == false)
         {
-
-            agent.SetDestination(target.position);
-
-            if(animator.GetBool("isWalking") == false)
-            {
-                animator.SetBool("isWalking", true);
-            }
-           
-            if (distance <= agent.stoppingDistance)
-            {
-                FaceTarget();
-            }
+            photonView.RPC("ChasePlayer", PhotonTargets.AllBuffered, distance);
             
         }
         if(distance > lookRadius)
@@ -108,6 +100,24 @@ public class EnemyIA : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+
+    [PunRPC]
+    private void ChasePlayer(float distance)
+    {
+
+        agent.SetDestination(target.position);
+
+        if (animator.GetBool("isWalking") == false)
+        {
+            animator.SetBool("isWalking", true);
+        }
+
+        if (distance <= agent.stoppingDistance)
+        {
+            FaceTarget();
+        }
+    }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -161,4 +171,6 @@ public class EnemyIA : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+
+
 }

@@ -48,4 +48,5 @@ MonoBehaviour:
   - MoveTowardTarget
   - RotateTowardsMovementVector
   - PlayerRunning
+  - ChasePlayer
   DisableAutoOpenWizard: 1
