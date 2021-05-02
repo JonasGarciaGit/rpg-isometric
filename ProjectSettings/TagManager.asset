@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - npcPotions
+  - Weapon
+  - Fireball
+  - Witch
+  - EnemyWeapon
+  - Player
+  - Respawn
   layers:
   - Default
   - TransparentFX

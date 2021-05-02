@@ -10,6 +10,21 @@ public class Health : MonoBehaviour
 
     public int currentHealth;
 
+    private PlayerEXP playerExp;
+
+    private EnemyIA enemyIa;
+
+    private bool receiveExp = false;
+
+    private bool weaponIsStay;
+
+    public DealSomeDamage dealSomeDamage;
+
+    private Animator playerAnimator;
+
+    [SerializeField]
+    private GameObject bloodPrefab;
+
     public event Action<float> OnHealthPctChanged = delegate { };
 
     private void OnEnable()
@@ -35,10 +50,55 @@ public class Health : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            ModifyHealth(-10);
+        //if (Input.GetKeyDown(KeyCode.Space))
+          //  ModifyHealth(-10);
+
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Weapon")
+        {
+            dealSomeDamage = other.GetComponent<DealSomeDamage>();
+            playerAnimator = other.GetComponentInParent<Animator>();
 
+            if(playerAnimator.GetBool("isAttacking") == true || playerAnimator.GetBool("isAttackingHeavying") == true && weaponIsStay == true)
+            {
+                ModifyHealth(-dealSomeDamage.weaponDamage);
+                GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+                Destroy(blood, 1f);
+            }
+
+
+            if(currentHealth <= 0)
+            {
+                if(receiveExp == false)
+                {
+                    playerExp = dealSomeDamage.GetComponentInParent<PlayerEXP>();
+                    enemyIa = GetComponentInParent<EnemyIA>();
+                    playerExp.ModifyExp(enemyIa.monsterExp);
+                    receiveExp = true;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Weapon")
+        {
+            weaponIsStay = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Weapon")
+        {
+            weaponIsStay = false;
+        }
+    }
 
 }

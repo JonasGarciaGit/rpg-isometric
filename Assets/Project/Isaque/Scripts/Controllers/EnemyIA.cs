@@ -12,6 +12,8 @@ public class EnemyIA : MonoBehaviour
     public float atkRadius = 2f;
     private float attackCooldown;
     private bool isDie;
+    public int monsterExp;
+    private bool animationHasFineshed;
 
     [SerializeField]
     private PhotonView photonView;
@@ -27,6 +29,11 @@ public class EnemyIA : MonoBehaviour
 
     public Transform startPosition;
     public Health monsterHealth;
+    public DealSomeDamage weaponDamage;
+    [SerializeField]
+    private GameObject skillOne;
+    [SerializeField]
+    private GameObject skillTwo;
 
 
     // Start is called before the first frame update
@@ -43,6 +50,7 @@ public class EnemyIA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         try
         {
             if(target == null)
@@ -60,49 +68,56 @@ public class EnemyIA : MonoBehaviour
 
         float distance = Vector3.Distance(target.position, transform.position);
         
-        if (distance <= lookRadius && distance > atkRadius && animator.GetBool("isAttkOne") == false && isDie == false)
+        if (distance <= lookRadius && animator.GetBool("isAttkOne") == false && animator.GetBool("isAttkTwo") == false && isDie == false )
         {
-            photonView.RPC("ChasePlayer", PhotonTargets.AllBuffered, distance);
-            
+
+                    photonView.RPC("ChasePlayer", PhotonTargets.AllBuffered, distance);       
+           
         }
         if(distance > lookRadius)
         {
-            target = null;
-            animator.SetBool("isWalking", true);
-            agent.destination = startPosition.position;
-            if (agent.velocity.sqrMagnitude == 0f)
-            {
-                animator.SetBool("isWalking", false);
-            }
-            
+                try
+                {
+                    target = null;
+                    animator.SetBool("isWalking", true);
+                    agent.destination = startPosition.position;
+                    if (agent.velocity.sqrMagnitude == 0f)
+                    {
+                        animator.SetBool("isWalking", false);
+                    }
+                }
+                catch
+                {
 
+                }
         }
 
         //Attacking 
-
+        
         if(distance <= atkRadius)
         {
             
             if(attackCooldown == 1f)
             {
-
                 int attkType = Random.Range(0, 10);
                 if(attkType <= 5)
                 {
-                    FaceTarget();
                     StartCoroutine("attackOne");
                     attackCooldown = 0f;
-                }
+                    }
 
                 if(attkType > 5)
                 {
-                    FaceTarget();
                     StartCoroutine("attackTwo");
                     attackCooldown = 0f;
-                }
+                    }
+                
             }
             
         }
+
+
+        
 
         }
         catch
@@ -124,16 +139,33 @@ public class EnemyIA : MonoBehaviour
     {
         try
         {
-            agent.SetDestination(target.position);
-
-            if (animator.GetBool("isWalking") == false)
+            if(distance <= atkRadius && gameObject.tag.Equals("Witch"))
             {
-                animator.SetBool("isWalking", true);
+                //Fazer com que a bruxa olhe na direção do alvo
+                Vector3 lookVector = target.transform.position - transform.position;
+                lookVector.y = transform.position.y;
+                Quaternion rot = Quaternion.LookRotation(lookVector);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 5f);
+
+                agent.isStopped = true;
+                animator.SetBool("isWalking", false);
             }
-
-            if (distance <= agent.stoppingDistance)
+            else
             {
-                FaceTarget();
+
+                agent.isStopped = false;
+                animator.SetBool("isWalking", true);
+                agent.SetDestination(target.position);
+
+                if (animator.GetBool("isWalking") == false)
+                {
+                    animator.SetBool("isWalking", true);
+                }
+
+                if (distance <= agent.stoppingDistance)
+                {
+                    FaceTarget();
+                }
             }
         }
         catch
@@ -154,36 +186,61 @@ public class EnemyIA : MonoBehaviour
 
     IEnumerator attackOne()
     {
+        
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttkOne", true);
 
-        yield return new WaitForSeconds(4f);
+        if (this.gameObject.tag == "Witch" && animator.GetBool("isDie") == false)
+        {
+            Invoke("instatiateSkillOne", 1.37f);
+        }
+
+            yield return new WaitForSeconds(4f);
+
 
         agent.isStopped = false;
         animator.SetBool("isAttkOne", false);
         animator.SetBool("isWalking", true);
+
+        yield return new WaitForSeconds(1f);
+
         attackCooldown = 1f;
+
+
     }
 
     IEnumerator attackTwo()
     {
+
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttkTwo", true);
 
+        if (this.gameObject.tag == "Witch" && animator.GetBool("isDie") == false)
+        {
+            Invoke("instatiateSkillTwo", 1f);
+        }
+
         yield return new WaitForSeconds(4f);
+
 
         agent.isStopped = false;
         animator.SetBool("isAttkTwo", false);
         animator.SetBool("isWalking", true);
+
+        yield return new WaitForSeconds(1f);
+
         attackCooldown = 1f;
     }
+
 
     IEnumerator Die()
     {
         if(isDie == true)
         {
+
+            weaponDamage.weaponDamage = 0;
             agent.isStopped = true;
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttkTwo", false);
@@ -199,8 +256,34 @@ public class EnemyIA : MonoBehaviour
 
     private void seachTarget()
     {
-        targets = GameObject.FindGameObjectsWithTag("Player");
-        t = targets.OrderBy(go => (this.transform.position - go.transform.position).sqrMagnitude).First();
-        target = t.transform;
+        try
+        {
+            targets = GameObject.FindGameObjectsWithTag("Player");
+            t = targets.OrderBy(go => (this.transform.position - go.transform.position).sqrMagnitude).First();
+            target = t.transform;
+        }
+        catch
+        {
+
+        }
+
+    }
+
+    [PunRPC]
+    private void instatiateSkillOne()
+    {
+
+        GameObject skill = Instantiate(skillOne, weaponDamage.myTransform.position, Quaternion.identity);
+        skill.GetComponent<Rigidbody>().velocity = transform.forward * 5f;
+        Destroy(skill, 5f);
+    }
+
+    [PunRPC]
+    private void instatiateSkillTwo()
+    {
+
+        GameObject skill = Instantiate(skillTwo, weaponDamage.myTransform.position, Quaternion.identity);
+        skill.GetComponent<Rigidbody>().velocity = transform.forward * 5f;
+        Destroy(skill, 5f);
     }
 }

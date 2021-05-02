@@ -49,4 +49,6 @@ MonoBehaviour:
   - RotateTowardsMovementVector
   - PlayerRunning
   - ChasePlayer
+  - instatiateSkillOne
+  - instatiateSkillTwo
   DisableAutoOpenWizard: 1
