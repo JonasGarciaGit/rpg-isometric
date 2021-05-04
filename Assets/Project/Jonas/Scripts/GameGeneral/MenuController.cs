@@ -43,6 +43,6 @@ public class MenuController : MonoBehaviour
 
     private void OnJoinedRoom()
     {
-            PhotonNetwork.LoadLevel("test_scene");
+            PhotonNetwork.LoadLevel("Map");
     }
 }

@@ -24,10 +24,9 @@ public class PlayerEXPUI : MonoBehaviour
 
     private void Start()
     {
-        level.font = font;
-        level.fontStyle = FontStyle.Bold;
-        level.fontSize = 14;
-        level.text = 1.ToString();
+        //level.font = font;
+        //level.fontStyle = FontStyle.Bold;
+        //level.fontSize = 14;
     }
 
     private void HandleExpChanged(float pct)
@@ -52,9 +51,6 @@ public class PlayerEXPUI : MonoBehaviour
 
     private void Update()
     {
-       if(playerExp.currentExp >= playerExp.maxExp)
-        {
-            level.text = (int.Parse(level.text) + 1).ToString();
-        }
+
     }
 }

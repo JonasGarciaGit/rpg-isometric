@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class PlayerEXP : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class PlayerEXP : MonoBehaviour
 
     public GameObject levelUpFX;
 
+    public Text level;
+
     public event Action<float> OnExpPctChanged = delegate { };
 
     private void OnEnable()
     {
         currentExp = 0;
+        level.text = 1.ToString();
     }
 
     public void ModifyExp(int amount)
@@ -46,6 +50,7 @@ public class PlayerEXP : MonoBehaviour
             maxExp = maxExp + 1000;
             float currentExpPct = (float)currentExp / (float)maxExp;
             OnExpPctChanged(currentExpPct);
+            level.text = (int.Parse(level.text) + 1).ToString();
 
             //Modifica status ao upar
             PlayerHP playerHP = GetComponentInParent<PlayerHP>();
