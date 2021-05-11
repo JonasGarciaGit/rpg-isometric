@@ -1884,10 +1884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c78d487f8c7624d9ee2e8b221c29fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target:
-  - {fileID: 1618660185}
-  - {fileID: 1023707665}
-  - {fileID: 830828316}
   pivotPoint: 0
 --- !u!1001 &1626274900
 PrefabInstance:
@@ -2508,7 +2504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469928, guid: 100dded3f80a43846a29e6fdf0e82019, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 469928, guid: 100dded3f80a43846a29e6fdf0e82019, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2564,8 +2560,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8954351, z: 1}
-  m_Center: {x: 0, y: 0.90041435, z: 0}
+  m_Size: {x: 1, y: 1.8439925, z: 1}
+  m_Center: {x: 0, y: 0.93837273, z: 0}
 --- !u!54 &2051916708
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2613,10 +2609,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2051916706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab17ce2d4ea7e2488983d67ca0df01b, type: 3}
+  m_Script: {fileID: 11500000, guid: 52ae50a06f442494db5ab7359e5c6f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 1618660185}
+  points:
+  - {fileID: 1618660185}
+  - {fileID: 1023707665}
+  - {fileID: 830828316}
 --- !u!1 &2055888891
 GameObject:
   m_ObjectHideFlags: 0
