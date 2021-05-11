@@ -26,15 +26,18 @@ public class MenuController : MonoBehaviour
     {
         int randomValue = Random.Range(1, 20);
         PhotonNetwork.playerName = "Player" + randomValue;
+        PhotonNetwork.player.NickName = "Player" + randomValue;
     }
 
     public void CreateGame()
     {
+        SetUserName();
         PhotonNetwork.CreateRoom("server1", new RoomOptions { maxPlayers = 5 }, null);
     }
 
     public void JoinGame()
     {
+        SetUserName();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.maxPlayers = 5;
         PhotonNetwork.JoinOrCreateRoom("server1", roomOptions, TypedLobby.Default);
@@ -43,6 +46,6 @@ public class MenuController : MonoBehaviour
 
     private void OnJoinedRoom()
     {
-            PhotonNetwork.LoadLevel("Map");
+            PhotonNetwork.LoadLevel("test_scene");
     }
 }

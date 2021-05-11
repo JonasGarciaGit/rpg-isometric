@@ -8,25 +8,27 @@ public class StoreController : MonoBehaviour
 {
     public Item[] items;
     public Text coins;
+  
 
     public void onBuyItem(string name)
     {
-        long coin = Int64.Parse(coins.text);
+            long coin = Int64.Parse(coins.text);
 
-        if (Inventory.instance.items.Count < 20) {
-            foreach (Item item in items)
+            if (Inventory.instance.items.Count < 20)
             {
-                if (item.name.Equals(name))
+                foreach (Item item in items)
                 {
-                    if (coin >= item.price)
+                    if (item.name.Equals(name))
                     {
-                        Inventory.instance.Add(item);
-                        coin -= item.price;
-                        coins.text = Convert.ToString(coin);
+                        if (coin >= item.price)
+                        {
+                            Inventory.instance.Add(item);
+                            coin -= item.price;
+                            coins.text = Convert.ToString(coin);
+                        }
                     }
                 }
             }
         }
-    }
 
 }

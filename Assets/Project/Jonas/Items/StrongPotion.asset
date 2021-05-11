@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f65023889763c7644b5579f0b019da6b, type: 3}
   price: 100
   isDefaultItem: 0
+  category: potion

@@ -22,7 +22,7 @@ public class PlayerHP : MonoBehaviour
 
     private void OnEnable()
     {
-        currentHealth = maxHealth;
+        currentHealth = 100;
     }
 
     public void ModifyHealth(int amount)

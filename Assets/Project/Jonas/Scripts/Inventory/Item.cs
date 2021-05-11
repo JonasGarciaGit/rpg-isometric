@@ -8,6 +8,9 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public int price = 0;
     public bool isDefaultItem = false;
+    public string category;
+    public int defense;
+    public int attack;
 
     public virtual void Use()
     {

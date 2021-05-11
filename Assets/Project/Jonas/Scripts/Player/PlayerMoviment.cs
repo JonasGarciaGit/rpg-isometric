@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMoviment : Photon.MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
     [SerializeField]
     private Rigidbody rigidbody;
 
-    private float moveSpeed = 4f;
+    public float moveSpeed = 4f;
 
     [SerializeField]
     private float rotateSpeed;
@@ -27,6 +29,10 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     [SerializeField]
     private GameObject weapon;
+
+    public Text nickname;
+
+    public Text characterName;
 
     public float jumpForce = 2.0f;
 
@@ -42,7 +48,13 @@ public class PlayerMoviment : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             camera.SetActive(true);
-            weapon.SetActive(false);        
+            weapon.SetActive(false);
+
+            Debug.Log(photonView.owner.NickName.ToString());
+
+            nickname.text = photonView.owner.NickName;
+            characterName.text = photonView.owner.NickName;
+
         }
 
 
