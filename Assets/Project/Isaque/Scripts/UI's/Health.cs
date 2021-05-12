@@ -20,6 +20,8 @@ public class Health : MonoBehaviour
 
     public DealSomeDamage dealSomeDamage;
 
+    public QuestSystem questSystem;
+
     private Animator playerAnimator;
 
     [SerializeField]
@@ -76,9 +78,33 @@ public class Health : MonoBehaviour
                 if(receiveExp == false)
                 {
                     playerExp = dealSomeDamage.GetComponentInParent<PlayerEXP>();
+                    questSystem = dealSomeDamage.GetComponentInParent<QuestSystem>();
+
+                    if (questSystem.isQuestForKill == true && questSystem.haveQuest == true)
+                    {
+
+                        if (questSystem.enemiesTag == this.gameObject.tag)
+                        {
+
+                            questSystem.countEnemiesDead = questSystem.countEnemiesDead - 1;
+
+
+                            if (questSystem.countEnemiesDead <= 0)
+                            {
+                                questSystem.newQuestInstructionsUI.text = "Quest completed! Deliver the quest to receive the rewards.";
+                            }
+                            else
+                            {
+                                questSystem.newQuestInstructionsUI.text = questSystem.basicIntruction + " left - " + questSystem.countEnemiesDead + " Enemies";
+                            }
+                        }
+
+                    }
+
                     enemyIa = GetComponentInParent<EnemyIA>();
                     playerExp.ModifyExp(enemyIa.monsterExp);
                     receiveExp = true;
+                    
                 }
             }
         }

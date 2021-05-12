@@ -36,6 +36,9 @@ public class EnemyIA : MonoBehaviour
     private GameObject skillTwo;
 
 
+    [SerializeField]
+    private GameObject coinPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -251,6 +254,7 @@ public class EnemyIA : MonoBehaviour
 
         yield return new WaitForSeconds(6f);
 
+        Instantiate(coinPrefab, this.gameObject.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

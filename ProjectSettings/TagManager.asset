@@ -4,12 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - npcPotions
   - Weapon
   - Fireball
   - Witch
   - EnemyWeapon
   - Player
   - Respawn
+  - Coin
+  - NPC_QUEST
+  - Orc
+  - StoneGolem
+  - mushroom
   - npcStore
   - npcPotions
   - npc
