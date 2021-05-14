@@ -40,6 +40,13 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     public Interactable focus;
 
+    public AudioSource audioSource;
+
+    public AudioClip lightAttack;
+
+    public AudioClip heavyAttack_1;
+
+    public AudioClip heavyAttack_2;
 
     private void Awake()
     {
@@ -111,6 +118,9 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && animator.GetBool("isGrounded") == true)
             {
+                audioSource.volume = 0.5f;
+                audioSource.clip = lightAttack;
+                audioSource.PlayDelayed(0.3f);
                 StartCoroutine("PlayerAttack");
             }
 
@@ -208,6 +218,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
         }
         else
         {
+            audioSource.Stop();
             animator.SetBool("isRunning", false);
         }
     }
@@ -257,8 +268,6 @@ public class PlayerMoviment : Photon.MonoBehaviour
         animator.SetBool("isAttackingHeavying", false);
         this.moveSpeed = 4f;
     }
-
-
 
 }
 

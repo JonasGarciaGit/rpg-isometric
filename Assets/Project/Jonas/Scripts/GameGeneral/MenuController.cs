@@ -9,6 +9,10 @@ public class MenuController : MonoBehaviour
     [SerializeField] private string VersionName = "0.1";
     [SerializeField] private GameObject ConnectPanel;
 
+    public Text nickname;
+    public Text createLobbyCode;
+    public Text joinLobbyCode;
+
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -24,15 +28,27 @@ public class MenuController : MonoBehaviour
 
     public void SetUserName()
     {
-        int randomValue = Random.Range(1, 20);
-        PhotonNetwork.playerName = "Player" + randomValue;
-        PhotonNetwork.player.NickName = "Player" + randomValue;
+        PhotonNetwork.playerName = nickname.text;
+        PhotonNetwork.player.NickName = nickname.text;
+    }
+
+    public void StartGame()
+    {
+        if (gameObject.GetComponent<MenuButtonController>().mode.Equals("createGame"))
+        {
+            CreateGame();
+        }
+
+        if (gameObject.GetComponent<MenuButtonController>().mode.Equals("joinGame"))
+        {
+            JoinGame();
+        }
     }
 
     public void CreateGame()
     {
         SetUserName();
-        PhotonNetwork.CreateRoom("server1", new RoomOptions { maxPlayers = 5 }, null);
+        PhotonNetwork.CreateRoom(createLobbyCode.text, new RoomOptions { maxPlayers = 4 }, null);
     }
 
     public void JoinGame()
@@ -40,12 +56,12 @@ public class MenuController : MonoBehaviour
         SetUserName();
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.maxPlayers = 5;
-        PhotonNetwork.JoinOrCreateRoom("server1", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(joinLobbyCode.text, roomOptions, TypedLobby.Default);
     }
 
 
     private void OnJoinedRoom()
     {
-            PhotonNetwork.LoadLevel("Map");
+            PhotonNetwork.LoadLevel("test_scene");
     }
 }
