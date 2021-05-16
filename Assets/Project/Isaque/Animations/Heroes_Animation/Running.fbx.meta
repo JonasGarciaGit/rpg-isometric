@@ -94,7 +94,7 @@ ModelImporter:
       - time: 0
         functionName: footStepSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: bb948ebcb3ceb8c41a7ba1f3c1994c56, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 46998326dbc6e974e989fa350b0fec2c, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

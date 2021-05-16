@@ -30,6 +30,10 @@ public class PlayerMoviment : Photon.MonoBehaviour
     [SerializeField]
     private GameObject weapon;
 
+
+    [SerializeField]
+    private GameObject weaponTwo;
+
     public Text nickname;
 
     public Text characterName;
@@ -42,11 +46,9 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     public AudioSource audioSource;
 
-    public AudioClip lightAttack;
+    public string characterClass;
 
-    public AudioClip heavyAttack_1;
-
-    public AudioClip heavyAttack_2;
+    private bool isAttacking = false;
 
     private void Awake()
     {
@@ -56,6 +58,12 @@ public class PlayerMoviment : Photon.MonoBehaviour
         {
             camera.SetActive(true);
             weapon.SetActive(false);
+
+            if(weaponTwo != null)
+            {
+                weaponTwo.SetActive(false);
+            }
+            
 
             Debug.Log(photonView.owner.NickName.ToString());
 
@@ -91,6 +99,16 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
             PlayerRunning();
 
+            if (Input.GetKeyDown(KeyCode.Space)
+                && animator.GetBool("isGrounded") == true
+                && animator.GetBool("isRolling") == false
+                && animator.GetBool("isRunningJumping") == false
+                && !isAttacking)
+            {
+                StartCoroutine("PlayerRolling");
+            }
+
+
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
@@ -118,18 +136,22 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && animator.GetBool("isGrounded") == true)
             {
-                audioSource.volume = 0.5f;
-                audioSource.clip = lightAttack;
-                audioSource.PlayDelayed(0.3f);
-                StartCoroutine("PlayerAttack");
+                if (!isAttacking)
+                {
+                    StartCoroutine("PlayerAttack");
+                }
+                
             }
 
             if (Input.GetMouseButtonDown(1) && animator.GetBool("isGrounded") == true)
             {
-                StartCoroutine("PlayerAttackHeavy");
+                if(!isAttacking){
+                    StartCoroutine("PlayerAttackHeavy");
+                }
+              
             }
 
-            if(Input.GetKey(KeyCode.Space) && animator.GetBool("isGrounded") == true 
+            if(Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true 
                 && animator.GetBool("isRunning") == false
                 && animator.GetBool("isAttacking") == false
                 && animator.GetBool("isAttackingHeavying") == false)
@@ -146,7 +168,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (Input.GetKey(KeyCode.Space) && animator.GetBool("isGrounded") == true
+        if (Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true
             && animator.GetBool("isRunning") == true
             && animator.GetBool("isAttacking") == false
             && animator.GetBool("isAttackingHeavying") == false)
@@ -212,7 +234,8 @@ public class PlayerMoviment : Photon.MonoBehaviour
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W)) 
             && animator.GetBool("isGrounded") == true 
             && animator.GetBool("isAttacking") == false
-             && animator.GetBool("isAttackingHeavying") == false)
+             && animator.GetBool("isAttackingHeavying") == false
+             && animator.GetBool("isRolling") == false)
         { 
             animator.SetBool("isRunning", true);
         }
@@ -233,6 +256,17 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     }
 
+    IEnumerator PlayerRolling()
+    {
+        animator.SetBool("isGrounded", true);
+        animator.SetBool("isRolling", true);
+        animator.SetBool("isRunning", false);
+        yield return new WaitForSeconds(0.6f);
+        animator.SetBool("isGrounded", true);
+        animator.SetBool("isRolling", false);
+
+    }
+
     IEnumerator PlayerJumpingStand()
     {
         this.moveSpeed = 0f;
@@ -244,29 +278,65 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        weapon.SetActive(true);
+        if (weapon.active == false)
+        {
+            weapon.SetActive(true);
+            if(weaponTwo != null)
+            {
+                weaponTwo.SetActive(true);
+            }
+            
+        }
+        
         animator.SetBool("isGrounded", true);
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", true);
         this.moveSpeed = 0f;
+        isAttacking = true;
         yield return new WaitForSeconds(1f);
+        isAttacking = false;
         animator.SetBool("isAttacking", false);
-        weapon.SetActive(false);
         this.moveSpeed = 4f;
 
+
+        weapon.SetActive(false);
+
+        if (weaponTwo != null)
+        {
+            weaponTwo.SetActive(false);
+        }
     }
 
     IEnumerator PlayerAttackHeavy()
     {
-        weapon.SetActive(true);
+        if (weapon.active == false)
+        {
+            weapon.SetActive(true);
+
+            if (weaponTwo != null)
+            {
+                weaponTwo.SetActive(true);
+            }
+
+        }
+
         animator.SetBool("isGrounded", true);
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttackingHeavying", true);
         this.moveSpeed = 0f;
-        yield return new WaitForSeconds(2f);
-        weapon.SetActive(false);
+        isAttacking = true;
+        yield return new WaitForSeconds(characterClass.Equals("Warrior") ? 1.5f : characterClass.Equals("Knight") ? 2f : characterClass.Equals("Viking") ? 2.5f : 1.5f);
+        isAttacking = false;
         animator.SetBool("isAttackingHeavying", false);
         this.moveSpeed = 4f;
+
+        weapon.SetActive(false);
+
+        if (weaponTwo != null)
+        {
+            weaponTwo.SetActive(false);
+        }
+
     }
 
 }

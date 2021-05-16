@@ -25,23 +25,14 @@ public class CharacterWindow : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            openCharacterWindow();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape) && characterWindow.active)
-        {
-            closeCharacterWindow();
+            openOrCloseCharacterWindow();
         }
 
     }
 
-    private void openCharacterWindow()
+    private void openOrCloseCharacterWindow()
     {
-        characterWindow.SetActive(true);
-    }
-
-    private void closeCharacterWindow()
-    {
-        characterWindow.SetActive(false);
+        characterWindow.SetActive(!characterWindow.activeSelf);
     }
 
     public void addHelm(Item item)

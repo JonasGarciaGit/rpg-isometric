@@ -28,14 +28,15 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - ChasePlayer
   - Chat
   - ColorRpc
   - DestroyRpc
   - DoJump
   - Flash
-  - FlipFalse
-  - FlipTrue
   - InstantiateRpc
+  - instatiateSkillOne
+  - instatiateSkillTwo
   - Marco
   - PickupItemInit
   - Polo
@@ -45,10 +46,4 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
-  - MoveTowardTarget
-  - RotateTowardsMovementVector
-  - PlayerRunning
-  - ChasePlayer
-  - instatiateSkillOne
-  - instatiateSkillTwo
   DisableAutoOpenWizard: 1
