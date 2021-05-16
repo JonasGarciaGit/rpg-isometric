@@ -3072,6 +3072,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   dealSomeDamage: {fileID: 0}
+  questSystem: {fileID: 0}
   bloodPrefab: {fileID: 1407402442211574, guid: 5d31a5b9b348544439d8079453188ecc, type: 3}
 --- !u!114 &7323589660412312080
 MonoBehaviour:
@@ -3210,27 +3211,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0000000066636403
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07945937
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99683815
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0000001555099
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_AnchoredPosition.y

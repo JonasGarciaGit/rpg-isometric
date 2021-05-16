@@ -36,6 +36,34 @@ public class LightingManager : MonoBehaviour
         RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
+       //Debug.Log("Horas do dia:: " + timePercent);
+
+        if(timePercent >= 0.7f || timePercent <= 0.3f)
+        {
+            
+            GameObject[] postLamps = GameObject.FindGameObjectsWithTag("postLamp");
+
+            foreach (GameObject postLamp in postLamps)
+            {
+                Light light = postLamp.GetComponentInChildren<Light>();
+                light.enabled = true;
+                //Debug.Log("Ativou a luz");
+            }
+        }
+        else
+        {
+           
+            GameObject[] postLamps = GameObject.FindGameObjectsWithTag("postLamp");
+
+            foreach (GameObject postLamp in postLamps)
+            {
+                Light light = postLamp.GetComponentInChildren<Light>();
+                light.enabled = false;
+                //Debug.Log("Desligou a luz");
+            }
+        }
+
+
         //If the directional light is set then rotate and set it's color, I actually rarely use the rotation because it casts tall shadows unless you clamp the value
         if (DirectionalLight != null)
         {

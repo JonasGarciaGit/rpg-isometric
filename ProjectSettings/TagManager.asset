@@ -19,11 +19,13 @@ TagManager:
   - npcStore
   - npcPotions
   - npc
+  - hideObject
+  - postLamp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Post-Processing
   - Water
   - UI
   - 
