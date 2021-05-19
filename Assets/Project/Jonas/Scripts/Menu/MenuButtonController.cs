@@ -116,6 +116,11 @@ public class MenuButtonController : MonoBehaviour
         character2.GetComponent<SelectCharacterOutline>().canSelect = false;
         character3.GetComponent<SelectCharacterOutline>().canSelect = false;
         character4.GetComponent<SelectCharacterOutline>().canSelect = false;
+
+        hasCharacterSelected = false;
+        joinLobbyCodeText.text = "";
+        createLobbyCodeText.text = "";
+
     }
 
     public void QuitGame()

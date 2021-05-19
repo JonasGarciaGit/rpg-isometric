@@ -10,15 +10,24 @@ public class VikingSounds : MonoBehaviour
 
     public void lightAttack()
     {
-        audioSourceAttacks.volume = 0.3f;
-        audioSourceAttacks.clip = lightAttackSound;
-        audioSourceAttacks.Play();
+        if (gameObject.GetComponent<PhotonView>().isMine)
+        {
+            audioSourceAttacks.volume = 0.3f;
+            audioSourceAttacks.clip = lightAttackSound;
+            audioSourceAttacks.Play();
+        }
+
     }
 
     public void heavyAttack()
     {
-        audioSourceAttacks.volume = 0.5f;
-        audioSourceAttacks.clip = heavyAttackSound;
-        audioSourceAttacks.Play();
+
+        if (gameObject.GetComponent<PhotonView>().isMine)
+        {
+            audioSourceAttacks.volume = 0.5f;
+            audioSourceAttacks.clip = heavyAttackSound;
+            audioSourceAttacks.Play();
+        }
+
     }
 }

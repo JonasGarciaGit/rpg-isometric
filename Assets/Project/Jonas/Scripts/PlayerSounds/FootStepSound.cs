@@ -10,9 +10,12 @@ public class FootStepSound : MonoBehaviour
 
     public void footStepSound()
     {
-        audioSourceFootStep.loop = true;
-        audioSourceFootStep.volume = 0.3f;
-        audioSourceFootStep.clip = runningSound;
-        audioSourceFootStep.Play();
+        if (gameObject.GetComponent<PhotonView>().isMine)
+        {
+            audioSourceFootStep.loop = true;
+            audioSourceFootStep.volume = 0.3f;
+            audioSourceFootStep.clip = runningSound;
+            audioSourceFootStep.Play();
+        }
     }
 }
