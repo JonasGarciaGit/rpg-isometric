@@ -21,6 +21,7 @@ TagManager:
   - npc
   - hideObject
   - postLamp
+  - Ogre
   layers:
   - Default
   - TransparentFX

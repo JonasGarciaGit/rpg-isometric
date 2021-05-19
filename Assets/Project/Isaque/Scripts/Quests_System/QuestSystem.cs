@@ -41,7 +41,7 @@ public class QuestSystem : MonoBehaviour
 
     public int gatheringQuantity = 0;
 
-
+    public Font font;
 
 
     // Start is called before the first frame update
@@ -180,5 +180,19 @@ public class QuestSystem : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         coinAnimation.enabled = false;
         coinAnimation.gameObject.SetActive(false);
+    }
+
+    private void OnGUI()
+    {
+        if (canAcessQuest == true)
+        {
+            GUIStyle style = new GUIStyle();
+            style.alignment = TextAnchor.MiddleCenter;
+            GUI.skin.label.fontSize = 10;
+            GUI.skin.font = font;
+            GUI.color = Color.white;
+            GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 50, 200, 30), "Press 'F' to talk");
+        }
+
     }
 }
