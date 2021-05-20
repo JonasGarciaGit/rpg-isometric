@@ -8,6 +8,9 @@ public class Store : MonoBehaviour
 
     private string npcTag;
     private bool canAcessStore = false;
+    private bool canExecuteVoice = false;
+    public Font font;
+    public AudioSource audioSource;
 
     private void Update()
     {
@@ -15,11 +18,21 @@ public class Store : MonoBehaviour
         if (store.active && Input.GetKeyDown(KeyCode.Escape))
         {
             closeStore();
+            canExecuteVoice = true;
         }
 
         if (canAcessStore && Input.GetKeyDown(KeyCode.F))
         {
+
+            if (audioSource != null && canExecuteVoice)
+            {
+                audioSource.Play();
+                canExecuteVoice = false;
+            }
+
             openStore();
+
+            
         }
 
     }
@@ -29,12 +42,20 @@ public class Store : MonoBehaviour
     {
         canAcessStore = true;
         npcTag = other.tag;
+
+        if(other.tag == "npcStore")
+        {
+            audioSource = other.GetComponent<AudioSource>();
+            canExecuteVoice = true;
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
         canAcessStore = false;
         npcTag = null;
+        canExecuteVoice = false;
 
     }
 
@@ -54,5 +75,6 @@ public class Store : MonoBehaviour
     {
         store.SetActive(false);
     }
+
 
 }

@@ -6235,6 +6235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   store: {fileID: 3817537903159827024}
+  font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
+  audioSource: {fileID: 0}
 --- !u!114 &67262811838851684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6316,6 +6318,8 @@ MonoBehaviour:
   collectablesTag: 
   gatheringQuantity: 0
   font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
+  npcVoice: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &4993507615339942960
 MonoBehaviour:
   m_ObjectHideFlags: 0

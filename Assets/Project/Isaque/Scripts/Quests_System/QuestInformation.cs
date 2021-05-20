@@ -14,6 +14,8 @@ public class QuestInformation : MonoBehaviour
     public string newInstructionsQuest;
     public string questLine;
     public string objective;
+    public AudioClip npcVoice;
+    public AudioSource npcAudio;
     
     //Variaveis utilizadas para quests onde devemos matar
     public bool killEnemies;
@@ -54,6 +56,8 @@ public class QuestInformation : MonoBehaviour
             isGatheringQuest = newQuest.isGatheringQuest;
             collectablesTag = newQuest.collectablesTag;
             gatheringQuantity = newQuest.gatheringQuantity;
+            npcVoice = newQuest.npcVoice;
+            npcAudio = newQuest.npcAudio;
 
             completed = false;
             newQuest = newQuest.newQuest;

@@ -43,6 +43,9 @@ public class QuestSystem : MonoBehaviour
 
     public Font font;
 
+    public AudioClip npcVoice;
+    public AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +77,7 @@ public class QuestSystem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F) && !questsLines.Contains(informations.questLine) && haveQuest == false)
             {
                 QuestUI.SetActive(true);
+                audioSource.PlayOneShot(npcVoice);
             }
 
         }
@@ -102,6 +106,8 @@ public class QuestSystem : MonoBehaviour
                     questRewardTextUI.text = informations.descriptionReward;
                     isQuestForKill = informations.killEnemies;
                     isGatheringQuest = informations.isGatheringQuest;
+                    npcVoice = informations.npcVoice;
+                    audioSource = informations.npcAudio;
 
                     if (isQuestForKill)
                     {
@@ -184,7 +190,7 @@ public class QuestSystem : MonoBehaviour
 
     private void OnGUI()
     {
-        if (canAcessQuest == true)
+        if (canAcessQuest == true && QuestUI.GetActive() == false)
         {
             GUIStyle style = new GUIStyle();
             style.alignment = TextAnchor.MiddleCenter;
