@@ -13484,6 +13484,7 @@ MonoBehaviour:
   isGatheringQuest: 0
   collectablesTag: 
   gatheringQuantity: 0
+  font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
 --- !u!114 &7681132984019221672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14311,7 +14312,9 @@ GameObject:
   - component: {fileID: 7232804748867843515}
   - component: {fileID: 1595393593654415711}
   - component: {fileID: 3358710388082891336}
-  m_Layer: 0
+  - component: {fileID: 6558339983023538133}
+  - component: {fileID: 2487795914175865485}
+  m_Layer: 3
   m_Name: CameraPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14436,6 +14439,80 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &6558339983023538133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041974285620144980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b63ffee2f056f45a6ffb455748cd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 378651030635565740}
+  tempRend: {fileID: 0}
+--- !u!114 &2487795914175865485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041974285620144980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 0}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 3
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &6050971573270637213
 GameObject:
   m_ObjectHideFlags: 0
