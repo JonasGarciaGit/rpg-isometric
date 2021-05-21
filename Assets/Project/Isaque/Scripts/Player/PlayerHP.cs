@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -18,11 +18,24 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private GameObject bloodPrefab;
 
+    private GameObject respawnPoint;
+
     public event Action<float> OnHealthPctChanged = delegate { };
+
+    public Image blackFade;
+
+    private float defense;
 
     private void OnEnable()
     {
         currentHealth = 100;
+    }
+
+    private void Start()
+    {
+        respawnPoint = GameObject.Find("RespawnInicial");
+        blackFade.canvasRenderer.SetAlpha(0.0f);
+        defense = float.Parse(gameObject.GetComponentInParent<CharacterWindow>(true).defense.text);
     }
 
     public void ModifyHealth(int amount)
@@ -33,67 +46,87 @@ public class PlayerHP : MonoBehaviour
         OnHealthPctChanged(currentHealthPct);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
-
-
+        if (currentHealth <= 0 && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            StartCoroutine("playerDying");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyWeapon")
         {
-            
+
             dealSomeDamage = other.GetComponent<DealSomeDamage>();
             monsterAnimator = other.GetComponentInParent<Animator>();
 
             if (dealSomeDamage.weaponDamage != 0)
             {
-            if (monsterAnimator.GetBool("isAttkOne") == true || monsterAnimator.GetBool("isAttkTwo") == true)
-            {
-                ModifyHealth(-dealSomeDamage.weaponDamage);
-                GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
-                 Destroy(blood, 1f);
+                if (monsterAnimator.GetBool("isAttkOne") == true || monsterAnimator.GetBool("isAttkTwo") == true)
+                {
+                    if (currentHealth <= 0)
+                    {
+                        currentHealth = 0;
+                        return;
+                    }
+
+                    double realDamage = dealSomeDamage.weaponDamage - (defense * 0.1);
+                    Debug.Log(realDamage);
+                    Debug.Log(Mathf.RoundToInt((float)realDamage));
+                    ModifyHealth(-Mathf.RoundToInt((float)realDamage));
+                    GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+                    Destroy(blood, 1f);
                 }
 
             }
-           
+
         }
-        if(other.tag == "Fireball")
+        if (other.tag == "Fireball")
         {
             dealSomeDamage = other.GetComponent<DealSomeDamage>();
 
-            ModifyHealth(-dealSomeDamage.weaponDamage);
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                return;
+            }
+
+            double realDamage = dealSomeDamage.weaponDamage - (defense * 0.1);
+            Debug.Log(realDamage);
+            Debug.Log(Mathf.RoundToInt((float)realDamage));
+            ModifyHealth(-Mathf.RoundToInt((float)realDamage));
             GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
             Destroy(blood, 1f);
-            
+
         }
 
     }
 
-    /*
-    private void OnTriggerStay(Collider other)
+    IEnumerator playerDying()
     {
-        if(other.tag == "EnemyWeapon")
-        {
-            weaponIsStay = true;
-        }
-        
+        gameObject.GetComponent<Animator>().Play("Death");
+        gameObject.GetComponent<PlayerMoviment>().moveSpeed = 0f;
+        FadeInImage();
+        yield return new WaitForSeconds(4f);
+        FadeOutImage();
+        gameObject.GetComponent<PlayerMoviment>().moveSpeed = 4f;
+        gameObject.GetComponent<Animator>().Play("Idle");
+        gameObject.transform.position = respawnPoint.transform.position;
+        ModifyHealth(maxHealth);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void FadeInImage()
     {
-        if (other.tag == "EnemyWeapon")
-        {
-            weaponIsStay = false;
-        }
+        blackFade.CrossFadeAlpha(1f, 2f, false);
     }
-    */
+
+    public void FadeOutImage()
+    {
+        blackFade.CrossFadeAlpha(0.0f, 10f, false);
+    }
+
 }

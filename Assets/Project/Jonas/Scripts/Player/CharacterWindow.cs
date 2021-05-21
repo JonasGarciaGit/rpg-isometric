@@ -20,6 +20,14 @@ public class CharacterWindow : MonoBehaviour
     public Text defense;
     public Text attack;
 
+    public Item initialSword;
+    public Item InitialArmor;
+
+    private void Start()
+    {
+        addWeapon(initialSword);
+        addArmor(InitialArmor);
+    }
 
     private void Update()
     {

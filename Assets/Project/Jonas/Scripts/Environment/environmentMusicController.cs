@@ -58,7 +58,6 @@ public class environmentMusicController : MonoBehaviour
     {
         if (canPlay && other.tag.Equals("Player") && other.gameObject.GetComponent<PhotonView>().isMine)
         {
-            Debug.Log("Estou dentro");
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
