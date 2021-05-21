@@ -34,7 +34,8 @@ public class EnemyIA : MonoBehaviour
     private GameObject skillOne;
     [SerializeField]
     private GameObject skillTwo;
-
+    [SerializeField]
+    private AudioClip skillEffectsSound;
 
     [SerializeField]
     private GameObject coinPrefab;
@@ -194,6 +195,7 @@ public class EnemyIA : MonoBehaviour
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttkOne", true);
 
+
         if (this.gameObject.tag == "Witch" && animator.GetBool("isDie") == false)
         {
             Invoke("instatiateSkillOne", 1.37f);
@@ -219,6 +221,7 @@ public class EnemyIA : MonoBehaviour
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttkTwo", true);
+
 
         if (this.gameObject.tag == "Witch" && animator.GetBool("isDie") == false)
         {
@@ -278,6 +281,12 @@ public class EnemyIA : MonoBehaviour
     {
 
         GameObject skill = Instantiate(skillOne, weaponDamage.myTransform.position, Quaternion.identity);
+        AudioSource audioSrc = skill.AddComponent<AudioSource>();
+        audioSrc.minDistance = 2f;
+        audioSrc.maxDistance = 2.1f;
+        audioSrc.volume = 0.2f;
+        audioSrc.clip = skillEffectsSound;
+        audioSrc.Play();
         skill.GetComponent<Rigidbody>().velocity = transform.forward * 5f;
         Destroy(skill, 5f);
     }
@@ -287,6 +296,12 @@ public class EnemyIA : MonoBehaviour
     {
 
         GameObject skill = Instantiate(skillTwo, weaponDamage.myTransform.position, Quaternion.identity);
+        AudioSource audioSrc = skill.AddComponent<AudioSource>();
+        audioSrc.minDistance = 2f;
+        audioSrc.maxDistance = 2.1f;
+        audioSrc.volume = 0.2f;
+        audioSrc.clip = skillEffectsSound;
+        audioSrc.Play();
         skill.GetComponent<Rigidbody>().velocity = transform.forward * 5f;
         Destroy(skill, 5f);
     }

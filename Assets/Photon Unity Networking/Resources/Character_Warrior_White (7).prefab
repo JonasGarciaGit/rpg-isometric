@@ -13437,7 +13437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxExp: 1000
   currentExp: 0
-  levelUpFX: {fileID: 4992940190382940514, guid: 2542d09e2d60f0f40b95f3fe137ead87, type: 3}
+  levelUpFX: {fileID: 4171970773990329986, guid: 15c4406698f780648bae6302e9b7cc5d, type: 3}
   level: {fileID: 4567917556082271955}
 --- !u!114 &1183550449427781580
 MonoBehaviour:

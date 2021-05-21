@@ -69,6 +69,7 @@ public class Health : MonoBehaviour
             {
                 ModifyHealth(-dealSomeDamage.weaponDamage);
                 GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+               
                 Destroy(blood, 1f);
             }
 
