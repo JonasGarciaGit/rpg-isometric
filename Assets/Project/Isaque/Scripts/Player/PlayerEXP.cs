@@ -58,7 +58,7 @@ public class PlayerEXP : MonoBehaviour
             {
                 playerHP.maxHealth += 200;
             }
-
+          
             playerHP.ModifyHealth(playerHP.maxHealth);
         }
 

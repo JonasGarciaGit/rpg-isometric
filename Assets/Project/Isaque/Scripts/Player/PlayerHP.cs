@@ -28,14 +28,13 @@ public class PlayerHP : MonoBehaviour
 
     private void OnEnable()
     {
-        currentHealth = 100;
+        currentHealth = maxHealth;
     }
 
     private void Start()
     {
         respawnPoint = GameObject.Find("RespawnInicial");
         blackFade.canvasRenderer.SetAlpha(0.0f);
-        defense = float.Parse(gameObject.GetComponentInParent<CharacterWindow>(true).defense.text);
     }
 
     public void ModifyHealth(int amount)
@@ -54,6 +53,16 @@ public class PlayerHP : MonoBehaviour
         {
             StartCoroutine("playerDying");
         }
+        if (gameObject.GetComponentInParent<CharacterWindow>(true).defense != null)
+        {
+            defense = float.Parse(gameObject.GetComponentInParent<CharacterWindow>(true).defense.text);
+        }
+
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,10 +82,14 @@ public class PlayerHP : MonoBehaviour
                         currentHealth = 0;
                         return;
                     }
+                
+                    double realDamage = dealSomeDamage.weaponDamage - (defense * 0.3);
+                   
+                    if(realDamage <= 0)
+                    {
+                        realDamage = 0;
+                    }
 
-                    double realDamage = dealSomeDamage.weaponDamage - (defense * 0.1);
-                    Debug.Log(realDamage);
-                    Debug.Log(Mathf.RoundToInt((float)realDamage));
                     ModifyHealth(-Mathf.RoundToInt((float)realDamage));
                     GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
                     Destroy(blood, 1f);
@@ -96,8 +109,6 @@ public class PlayerHP : MonoBehaviour
             }
 
             double realDamage = dealSomeDamage.weaponDamage - (defense * 0.1);
-            Debug.Log(realDamage);
-            Debug.Log(Mathf.RoundToInt((float)realDamage));
             ModifyHealth(-Mathf.RoundToInt((float)realDamage));
             GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
             Destroy(blood, 1f);
