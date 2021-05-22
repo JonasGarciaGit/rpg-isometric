@@ -205,6 +205,16 @@ public class PlayerMoviment : Photon.MonoBehaviour
     {
         try
         {
+            if (animator.GetBool("isAttacking") ||
+                animator.GetBool("isAttackingHeavying") ||
+                animator.GetCurrentAnimatorStateInfo(0).IsName("Death") ||
+                animator.GetCurrentAnimatorStateInfo(0).IsName("Gathering"))
+
+            {
+                return;
+            }
+
+
             if (movementVector.magnitude == 0) { return; }
             var rotation = Quaternion.LookRotation(movementVector);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotateSpeed);

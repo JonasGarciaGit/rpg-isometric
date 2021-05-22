@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gathering : MonoBehaviour
 {
@@ -6,6 +9,10 @@ public class Gathering : MonoBehaviour
     private bool canGathering;
     public Font font;
     private QuestSystem questSystem;
+    private Animator playerAnimator;
+    private bool canExecuteAgain = true;
+    private bool coroutineGathering = false;
+    private PlayerMoviment playerMove;
 
     // Start is called before the first frame update
     void Start()
@@ -19,18 +26,13 @@ public class Gathering : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && canGathering == true)
         {
 
-            questSystem.gatheringQuantity = questSystem.gatheringQuantity - 1;
-
-
-            if (questSystem.gatheringQuantity <= 0)
+            if(questSystem.gatheringQuantity > 0 && coroutineGathering == false)
             {
-                questSystem.newQuestInstructionsUI.text = "Quest completed! Deliver the quest to receive the rewards.";
+                StartCoroutine("GatheringIEnum");
             }
-            else
-            {
-                questSystem.newQuestInstructionsUI.text = questSystem.basicIntruction + " - left " + questSystem.gatheringQuantity + " " + this.gameObject.tag + " to completed";
-            }
+            
         }
+
 
     }
 
@@ -39,9 +41,10 @@ public class Gathering : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            
-            questSystem = other.GetComponent<QuestSystem>();
 
+            questSystem = other.GetComponent<QuestSystem>();
+            playerMove = other.GetComponent<PlayerMoviment>();
+            playerAnimator = questSystem.GetComponentInParent<Animator>();
 
             if (questSystem.isGatheringQuest == true && questSystem.haveQuest == true)
             {
@@ -76,4 +79,47 @@ public class Gathering : MonoBehaviour
         }
 
     }
+
+    IEnumerator GatheringIEnum()
+    {
+
+        coroutineGathering = true;
+
+        if (canExecuteAgain)
+        {
+            playerAnimator.Play("Gathering");
+            playerMove.moveSpeed = 0;
+        }
+        
+
+        if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Gathering") && canExecuteAgain == true)
+        {
+
+            
+            if(canExecuteAgain == true)
+            {
+                questSystem.gatheringQuantity = questSystem.gatheringQuantity - 1;
+            }
+            
+
+            canExecuteAgain = false;
+
+            if (questSystem.gatheringQuantity <= 0)
+            {
+                questSystem.newQuestInstructionsUI.text = "Quest completed! Deliver the quest to receive the rewards.";
+            }
+            else
+            {
+                questSystem.newQuestInstructionsUI.text = questSystem.basicIntruction + " - left " + questSystem.gatheringQuantity + " " + this.gameObject.tag + " to completed";
+            }
+        }
+
+        yield return new WaitForSeconds(5f);
+
+        playerAnimator.Play("Idle");
+        canExecuteAgain = true;
+        coroutineGathering = false;
+        playerMove.moveSpeed = 4;
+    }
 }
+

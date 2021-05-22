@@ -74,7 +74,7 @@ public class QuestSystem : MonoBehaviour
         if(canAcessQuest == true)
         {
             
-            if (Input.GetKeyDown(KeyCode.F) && !questsLines.Contains(informations.questLine) && haveQuest == false)
+            if (Input.GetKeyDown(KeyCode.F) && !questsLines.Contains(informations.questLine) && haveQuest == false && QuestUI.GetActive() == false)
             {
                 QuestUI.SetActive(true);
                 audioSource.PlayOneShot(npcVoice);
