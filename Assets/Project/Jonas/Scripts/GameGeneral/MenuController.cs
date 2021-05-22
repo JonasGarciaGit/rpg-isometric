@@ -55,7 +55,7 @@ public class MenuController : MonoBehaviour
     {
         SetUserName();
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.maxPlayers = 5;
+        roomOptions.maxPlayers = 4;
         PhotonNetwork.JoinOrCreateRoom(joinLobbyCode.text, roomOptions, TypedLobby.Default);
     }
 

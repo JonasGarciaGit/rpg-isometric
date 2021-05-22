@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
 
 public class PlayerMoviment : Photon.MonoBehaviour
 {
@@ -50,6 +48,10 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     private bool isAttacking = false;
 
+    private bool anotherPlayerAttacking = false;
+
+    private string anotherPlayerNickname;
+
     private void Awake()
     {
         _input = GetComponent<InputHandler>();
@@ -59,17 +61,27 @@ public class PlayerMoviment : Photon.MonoBehaviour
             camera.SetActive(true);
             weapon.SetActive(false);
 
-            if(weaponTwo != null)
+            if (weaponTwo != null)
             {
                 weaponTwo.SetActive(false);
             }
-            
+
 
             Debug.Log(photonView.owner.NickName.ToString());
 
             nickname.text = photonView.owner.NickName;
             characterName.text = photonView.owner.NickName;
 
+        }
+
+        if (!photonView.isMine)
+        {
+            weapon.SetActive(false);
+
+            if (weaponTwo != null)
+            {
+                weaponTwo.SetActive(false);
+            }
         }
 
 
@@ -140,29 +152,48 @@ public class PlayerMoviment : Photon.MonoBehaviour
                 {
                     StartCoroutine("PlayerAttack");
                 }
-                
+
             }
 
             if (Input.GetMouseButtonDown(1) && animator.GetBool("isGrounded") == true)
             {
-                if(!isAttacking){
+                if (!isAttacking)
+                {
                     StartCoroutine("PlayerAttackHeavy");
                 }
-              
+
             }
 
-            if(Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true 
+            if (Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true
                 && animator.GetBool("isRunning") == false
                 && animator.GetBool("isAttacking") == false
                 && animator.GetBool("isAttackingHeavying") == false)
             {
                 StartCoroutine("PlayerJumpingStand");
             }
-
-
-      
         }
+        else
+        {
+            if(anotherPlayerAttacking && anotherPlayerNickname.Equals(photonView.owner.NickName))
+            {
+                weapon.SetActive(true);
 
+                if (weaponTwo != null)
+                {
+                    weaponTwo.SetActive(true);
+                }
+            }
+            else
+            {
+                weapon.SetActive(false);
+
+                if (weaponTwo != null)
+                {
+                    weaponTwo.SetActive(false);
+                }
+            }
+
+        }
     }
 
     private void FixedUpdate()
@@ -176,13 +207,14 @@ public class PlayerMoviment : Photon.MonoBehaviour
             rigidbody.AddForce(jump * jumpForce, ForceMode.Impulse);
             StartCoroutine("PlayerJumpingRunning");
         }
+
     }
 
     void SetFocus(Interactable newFocus)
     {
-        if(newFocus != focus)
+        if (newFocus != focus)
         {
-            if(focus != null)
+            if (focus != null)
                 focus.OnDefocused();
 
 
@@ -195,12 +227,12 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     void RemoveFocus()
     {
-        if(focus != null)
+        if (focus != null)
             focus.OnDefocused();
 
         focus = null;
     }
-  
+
     private void RotateTowardsMovementVector(Vector3 movementVector)
     {
         try
@@ -231,7 +263,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
     {
         var speed = moveSpeed * Time.deltaTime;
 
-        targetVector = Quaternion.Euler(0, camera.transform.eulerAngles.y , 0) * targetVector;
+        targetVector = Quaternion.Euler(0, camera.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
         return targetVector;
@@ -241,12 +273,12 @@ public class PlayerMoviment : Photon.MonoBehaviour
     //Funções para controllar a animação do jogador
     private void PlayerRunning()
     {
-        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W)) 
-            && animator.GetBool("isGrounded") == true 
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+            && animator.GetBool("isGrounded") == true
             && animator.GetBool("isAttacking") == false
              && animator.GetBool("isAttackingHeavying") == false
              && animator.GetBool("isRolling") == false)
-        { 
+        {
             animator.SetBool("isRunning", true);
         }
         else
@@ -291,20 +323,22 @@ public class PlayerMoviment : Photon.MonoBehaviour
         if (weapon.active == false)
         {
             weapon.SetActive(true);
-            if(weaponTwo != null)
+            if (weaponTwo != null)
             {
                 weaponTwo.SetActive(true);
             }
-            
+
         }
-        
+
         animator.SetBool("isGrounded", true);
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", true);
         this.moveSpeed = 0f;
         isAttacking = true;
+        photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         yield return new WaitForSeconds(1f);
         isAttacking = false;
+        photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         animator.SetBool("isAttacking", false);
         this.moveSpeed = 4f;
 
@@ -335,8 +369,10 @@ public class PlayerMoviment : Photon.MonoBehaviour
         animator.SetBool("isAttackingHeavying", true);
         this.moveSpeed = 0f;
         isAttacking = true;
+        photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         yield return new WaitForSeconds(characterClass.Equals("Warrior") ? 1.5f : characterClass.Equals("Knight") ? 2f : characterClass.Equals("Viking") ? 2.5f : 1.5f);
         isAttacking = false;
+        photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         animator.SetBool("isAttackingHeavying", false);
         this.moveSpeed = 4f;
 
@@ -347,6 +383,13 @@ public class PlayerMoviment : Photon.MonoBehaviour
             weaponTwo.SetActive(false);
         }
 
+    }
+
+    [PunRPC]
+    public void checkAnotherPlayerAttack(bool value, string nickname)
+    {
+        this.anotherPlayerAttacking = value;
+        this.anotherPlayerNickname = nickname;
     }
 
 }
