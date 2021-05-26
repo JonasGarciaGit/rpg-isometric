@@ -28,6 +28,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 60
   myTransform: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &1223353359752288976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790809897643901268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7e32e6ff20eb24a824175b2eb43685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4114234501994188121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,6 +204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c208a117376ab0949a06cfa1bb14185f, type: 3}
+--- !u!1 &8790809897643901268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4676857912187335812, guid: c208a117376ab0949a06cfa1bb14185f, type: 3}
+  m_PrefabInstance: {fileID: 4114234502260930000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7264090661684733599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6762024561725166415, guid: c208a117376ab0949a06cfa1bb14185f, type: 3}

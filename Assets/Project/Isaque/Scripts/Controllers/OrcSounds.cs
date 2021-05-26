@@ -7,7 +7,7 @@ public class OrcSounds : MonoBehaviour
     public AudioClip attackingAudio;
     public AudioSource audioSource;
     public AudioClip deathAudio;
-
+    
 
     public void Attack()
     {

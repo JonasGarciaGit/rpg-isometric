@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 6
-  atkRadius: 3
+  atkRadius: 3.5
   monsterExp: 10000
   photonView: {fileID: 5724591514228144023}
   target: {fileID: 0}
@@ -858,6 +858,7 @@ MonoBehaviour:
   weaponDamage: {fileID: 1821958527895296179}
   skillOne: {fileID: 0}
   skillTwo: {fileID: 0}
+  skillEffectsSound: {fileID: 0}
   coinPrefab: {fileID: 1663164920024155306, guid: e8d36cc8eabf07241909ee3bf9cf7447, type: 3}
 --- !u!114 &7692556944968995393
 MonoBehaviour:
@@ -921,7 +922,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 3
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1223,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 100
   myTransform: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &3745881159286753965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,6 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 100
   myTransform: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &4935522725054459185
 GameObject:
   m_ObjectHideFlags: 0

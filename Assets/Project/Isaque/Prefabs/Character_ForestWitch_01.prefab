@@ -2526,6 +2526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 20
   myTransform: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &8520250003408232140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,7 +3072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eed38bb669c09147ac7d4d11438e1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   dealSomeDamage: {fileID: 0}
   questSystem: {fileID: 0}
@@ -3144,9 +3145,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

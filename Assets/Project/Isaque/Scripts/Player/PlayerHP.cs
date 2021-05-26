@@ -26,12 +26,14 @@ public class PlayerHP : MonoBehaviour
 
     private float defense;
 
+    private float damageCooldown = 1f;
+
     public Text characterHpInfo;
 
     private void OnEnable()
     {
         currentHealth = maxHealth;
-        characterHpInfo.text = maxHealth.ToString(); 
+        characterHpInfo.text = maxHealth.ToString();
     }
 
     private void Start()
@@ -61,11 +63,18 @@ public class PlayerHP : MonoBehaviour
             defense = float.Parse(gameObject.GetComponentInParent<CharacterWindow>(true).defense.text);
         }
 
-        if(currentHealth > maxHealth)
+        if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
 
+        if (monsterAnimator != null)
+        {
+            if (monsterAnimator.GetBool("isAttkOne") == false && monsterAnimator.GetBool("isAttkTwo") == false)
+            {
+                damageCooldown = 1f;
+            }
+        }
 
         characterHpInfo.text = maxHealth.ToString();
 
@@ -83,22 +92,31 @@ public class PlayerHP : MonoBehaviour
             {
                 if (monsterAnimator.GetBool("isAttkOne") == true || monsterAnimator.GetBool("isAttkTwo") == true)
                 {
-                    if (currentHealth <= 0)
+                    if (damageCooldown == 1f)
                     {
-                        currentHealth = 0;
-                        return;
-                    }
-                
-                    double realDamage = dealSomeDamage.weaponDamage - (defense * 0.3);
-                   
-                    if(realDamage <= 0)
-                    {
-                        realDamage = 0;
-                    }
+                        if (currentHealth <= 0)
+                        {
+                            currentHealth = 0;
+                            return;
+                        }
 
-                    ModifyHealth(-Mathf.RoundToInt((float)realDamage));
-                    GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
-                    Destroy(blood, 1f);
+                        double realDamage = dealSomeDamage.weaponDamage - (defense * 0.3);
+
+                        if (realDamage <= 0)
+                        {
+                            realDamage = 0;
+                        }
+
+                        ModifyHealth(-Mathf.RoundToInt((float)realDamage));
+                        GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+                        Destroy(blood, 1f);
+
+                        if (!monsterAnimator.GetBool("isAttkTwo") == true)
+                        {
+                            damageCooldown = 0f;
+                        }
+
+                    }
                 }
 
             }

@@ -6,7 +6,7 @@ using System;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth = 100;
+    public int maxHealth = 100;
 
     public int currentHealth;
 
@@ -26,6 +26,8 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private GameObject bloodPrefab;
+
+    private float damageCooldown = 1f;
 
     public event Action<float> OnHealthPctChanged = delegate { };
 
@@ -52,8 +54,14 @@ public class Health : MonoBehaviour
     void Update()
     {
 
-        //if (Input.GetKeyDown(KeyCode.Space))
-          //  ModifyHealth(-10);
+        if(playerAnimator != null)
+        {
+            if (playerAnimator.GetBool("isAttacking") == false && playerAnimator.GetBool("isAttackingHeavying") == false)
+            {
+                damageCooldown = 1f;
+            }
+
+        }
 
 
     }
@@ -64,13 +72,20 @@ public class Health : MonoBehaviour
         {
             dealSomeDamage = other.GetComponent<DealSomeDamage>();
             playerAnimator = other.GetComponentInParent<Animator>();
+            
 
-            if(playerAnimator.GetBool("isAttacking") == true || playerAnimator.GetBool("isAttackingHeavying") == true && weaponIsStay == true)
+            if(playerAnimator.GetBool("isAttacking") == true || playerAnimator.GetBool("isAttackingHeavying") == true)
             {
-                ModifyHealth(-dealSomeDamage.weaponDamage);
-                GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
-               
-                Destroy(blood, 1f);
+                if(damageCooldown == 1f)
+                {
+                    ModifyHealth(-dealSomeDamage.weaponDamage);
+                    GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+
+                    Destroy(blood, 1f);
+
+                    damageCooldown = 0f;
+                }
+
             }
 
 

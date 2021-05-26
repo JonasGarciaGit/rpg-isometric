@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.6490603, g: 0.6285238, b: 0.50348973, a: 1}
+  m_FogColor: {r: 0.050792787, g: 0.050792787, b: 0.050792787, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 20
   m_LinearFogEnd: 40
-  m_AmbientSkyColor: {r: 0.8457852, g: 0.8445986, b: 0.8426646, a: 1}
+  m_AmbientSkyColor: {r: 0.27140734, g: 0.3284218, b: 0.6666667, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3ca8f1b8519f1cf4fb651969334bf040, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b6bcd67a922d5104d824c045e1352463, type: 2}
 --- !u!1001 &2359531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6314,7 +6314,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 42.042, y: -38.41, z: -1.582}
 --- !u!114 &151594568
 MonoBehaviour:
@@ -32907,6 +32907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_SnowPile_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 189700, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 430762, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
       propertyPath: m_RootOrder
       value: 865
@@ -34749,6 +34753,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_SnowPile_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 189700, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 430762, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
       propertyPath: m_RootOrder
       value: 863
@@ -35246,6 +35254,10 @@ PrefabInstance:
     - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
@@ -36326,6 +36338,10 @@ PrefabInstance:
     - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
@@ -37921,7 +37937,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941433529}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -46402,6 +46418,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_SnowPile_02 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
       value: 904
@@ -48229,6 +48249,10 @@ PrefabInstance:
     - target: {fileID: 184458, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 184458, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 439438, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
       propertyPath: m_RootOrder
@@ -55506,7 +55530,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405922258}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -57070,6 +57094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_SnowPile_02 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
       value: 907
@@ -57435,7 +57463,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6920395, g: 0.6920395, b: 0.6920395, a: 1}
+  m_Color: {r: 0.04613597, g: 0.04613597, b: 0.04613597, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -57493,7 +57521,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445659015}
-  m_LocalRotation: {x: 0.028015314, y: 0.94332683, z: -0.32021627, w: 0.08253046}
+  m_LocalRotation: {x: -0.0568918, y: 0.7546823, z: 0.6502758, w: 0.06602619}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -62331,6 +62359,8 @@ MonoBehaviour:
   newInstructionsQuest: Kill the Stone Golem
   questLine: quest6
   objective: Dragomir_Npc
+  npcVoice: {fileID: 0}
+  npcAudio: {fileID: 0}
   killEnemies: 1
   typeEnemies: StoneGolem
   countEnemies: 1
@@ -64916,6 +64946,10 @@ PrefabInstance:
     - target: {fileID: 189700, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 189700, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 430762, guid: 8385b5d2216332940bc665cd517a4e3b, type: 3}
       propertyPath: m_RootOrder
@@ -68308,7 +68342,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722756817}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -69154,6 +69188,8 @@ MonoBehaviour:
   newInstructionsQuest: Gathering mushroom's
   questLine: quest3
   objective: Mr.Beast_Npc
+  npcVoice: {fileID: 0}
+  npcAudio: {fileID: 0}
   killEnemies: 0
   typeEnemies: 
   countEnemies: 0
@@ -69180,6 +69216,8 @@ MonoBehaviour:
   newInstructionsQuest: Kill the orcs
   questLine: quest4
   objective: Mr.Beast_Npc
+  npcVoice: {fileID: 0}
+  npcAudio: {fileID: 0}
   killEnemies: 1
   typeEnemies: Orc
   countEnemies: 4
@@ -69206,6 +69244,8 @@ MonoBehaviour:
   newInstructionsQuest: Talk to dragomir
   questLine: quest5
   objective: Dragomir_Npc
+  npcVoice: {fileID: 0}
+  npcAudio: {fileID: 0}
   killEnemies: 0
   typeEnemies: 
   countEnemies: 0
@@ -69348,6 +69388,10 @@ PrefabInstance:
     - target: {fileID: 184458, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 184458, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 439438, guid: bba9610331c8e5040a9ed5720d33f7c5, type: 3}
       propertyPath: m_RootOrder
@@ -72537,7 +72581,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822290707}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -74115,6 +74159,10 @@ PrefabInstance:
     - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_02 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
@@ -78300,6 +78348,10 @@ PrefabInstance:
     - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_Name
       value: SM_Env_SnowPile_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 133318, guid: 5f426072c3298254381d5794d96f2239, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 409282, guid: 5f426072c3298254381d5794d96f2239, type: 3}
       propertyPath: m_RootOrder
@@ -82746,7 +82798,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087094066}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -85152,6 +85204,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3090582282681556322, guid: babd57c82fc722741979cb7bba726cfa, type: 3}
+      propertyPath: viewIdField
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090582282681556322, guid: babd57c82fc722741979cb7bba726cfa, type: 3}
+      propertyPath: instantiationId
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 4549474258177392381, guid: babd57c82fc722741979cb7bba726cfa, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -85471,6 +85531,14 @@ PrefabInstance:
     - target: {fileID: 797525505491459478, guid: fb5791524b0a9654bb0e7d0a37b22a4a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371638382061168814, guid: fb5791524b0a9654bb0e7d0a37b22a4a, type: 3}
+      propertyPath: viewIdField
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371638382061168814, guid: fb5791524b0a9654bb0e7d0a37b22a4a, type: 3}
+      propertyPath: instantiationId
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2054669035875821146, guid: fb5791524b0a9654bb0e7d0a37b22a4a, type: 3}
       propertyPath: m_IsActive

@@ -9,7 +9,11 @@ public class PickUpCoin : MonoBehaviour
 
     public TextMeshProUGUI[] playerTextsPro;
     public Text[] playerText;
+    public string monsterType;
+    private int coinValue = 0;
     TextMeshProUGUI coinTxt = null;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,29 @@ public class PickUpCoin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(monsterType != null)
+        {
+            if(coinValue == 0)
+            {
+                if (monsterType == "Orc")
+                {
+                    coinValue = 40;
+                }
+                else if (monsterType == "Witch")
+                {
+                    coinValue = 30;
+                }
+                else if (monsterType == "Ogre")
+                {
+                    coinValue = 50;
+                }
+                else if (monsterType == "StoneGolem")
+                {
+                    coinValue = 500;
+                }
+            }
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,9 +67,8 @@ public class PickUpCoin : MonoBehaviour
             {
                 if(texto.name == "Coins")
                 {
-                    int value = Random.Range(10, 50);
-                    texto.text = (int.Parse(texto.text) + value).ToString(); ;
-                    coinTxt.text = value.ToString() + " Coins!";
+                    texto.text = (int.Parse(texto.text) + coinValue).ToString(); ;
+                    coinTxt.text = coinValue.ToString() + " Coins!";
                     coinTxt.gameObject.SetActive(true);
                     coinTxt.enabled = true;
                     StartCoroutine("waitForSecondsFunc");

@@ -22,6 +22,7 @@ TagManager:
   - hideObject
   - postLamp
   - Ogre
+  - ground
   layers:
   - Default
   - TransparentFX

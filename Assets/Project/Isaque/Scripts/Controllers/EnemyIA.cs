@@ -30,6 +30,7 @@ public class EnemyIA : MonoBehaviour
     public Transform startPosition;
     public Health monsterHealth;
     public DealSomeDamage weaponDamage;
+
     [SerializeField]
     private GameObject skillOne;
     [SerializeField]
@@ -85,6 +86,18 @@ public class EnemyIA : MonoBehaviour
                     target = null;
                     animator.SetBool("isWalking", true);
                     agent.destination = startPosition.position;
+
+                    if(monsterHealth.currentHealth < monsterHealth.maxHealth)
+                    {
+                        monsterHealth.ModifyHealth(20);
+                        if(monsterHealth.currentHealth > monsterHealth.maxHealth)
+                        {
+                            int adjustLife = monsterHealth.maxHealth - monsterHealth.currentHealth;
+                            monsterHealth.ModifyHealth(-adjustLife);
+                        }
+                       
+                    }
+                    
                     if (agent.velocity.sqrMagnitude == 0f)
                     {
                         animator.SetBool("isWalking", false);
@@ -257,10 +270,12 @@ public class EnemyIA : MonoBehaviour
 
         yield return new WaitForSeconds(6f);
 
-        Instantiate(coinPrefab, this.gameObject.transform.position, Quaternion.identity);
+        GameObject coin = Instantiate(coinPrefab, this.gameObject.transform.position, Quaternion.identity);
+        coin.GetComponent<PickUpCoin>().monsterType = this.gameObject.tag;
         Destroy(this.gameObject);
     }
 
+    
     private void seachTarget()
     {
         try
