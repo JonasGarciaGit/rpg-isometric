@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1663164920024259250}
   - component: {fileID: 6226320082270865376}
   - component: {fileID: 2126917414420942134}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SM_Prop_Sack_01
   m_TagString: Coin
   m_Icon: {fileID: 0}
@@ -140,3 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733046031bea6d9439945d02f794dc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTextsPro: []
+  playerText: []

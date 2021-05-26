@@ -17,10 +17,13 @@ public class PlayerEXP : MonoBehaviour
 
     public event Action<float> OnExpPctChanged = delegate { };
 
+    public Text characterXpInfo;
+
     private void OnEnable()
     {
         currentExp = 0;
         level.text = 1.ToString();
+        characterXpInfo.text = currentExp.ToString();
     }
 
     public void ModifyExp(int amount)
@@ -61,6 +64,9 @@ public class PlayerEXP : MonoBehaviour
           
             playerHP.ModifyHealth(playerHP.maxHealth);
         }
+
+
+        characterXpInfo.text = currentExp.ToString();
 
     }
 }

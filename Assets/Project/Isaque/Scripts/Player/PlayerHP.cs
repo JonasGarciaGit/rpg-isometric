@@ -26,9 +26,12 @@ public class PlayerHP : MonoBehaviour
 
     private float defense;
 
+    public Text characterHpInfo;
+
     private void OnEnable()
     {
         currentHealth = maxHealth;
+        characterHpInfo.text = maxHealth.ToString(); 
     }
 
     private void Start()
@@ -62,7 +65,10 @@ public class PlayerHP : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-       
+
+
+        characterHpInfo.text = maxHealth.ToString();
+
     }
 
     private void OnTriggerEnter(Collider other)

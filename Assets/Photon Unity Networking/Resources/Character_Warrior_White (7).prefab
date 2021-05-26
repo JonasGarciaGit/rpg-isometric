@@ -17268,6 +17268,7 @@ GameObject:
   - component: {fileID: 4346150494655979248}
   - component: {fileID: 1047459462818520898}
   - component: {fileID: 2310919305403142930}
+  - component: {fileID: 7475172911335042534}
   m_Layer: 6
   m_Name: Character_Warrior_White (7)
   m_TagString: Player
@@ -17560,6 +17561,7 @@ MonoBehaviour:
   dealSomeDamage: {fileID: 0}
   bloodPrefab: {fileID: 1407402442211574, guid: 5d31a5b9b348544439d8079453188ecc, type: 3}
   blackFade: {fileID: 6980643099122018643}
+  characterHpInfo: {fileID: 7151982765434710255}
 --- !u!114 &7687364662010448219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17576,6 +17578,7 @@ MonoBehaviour:
   currentExp: 0
   levelUpFX: {fileID: 4171970773990329986, guid: 15c4406698f780648bae6302e9b7cc5d, type: 3}
   level: {fileID: 7198369563838857550}
+  characterXpInfo: {fileID: 7007484148222688098}
 --- !u!114 &5479920627267394001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17670,6 +17673,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuInGame: {fileID: 4473682470224273466}
+--- !u!81 &7475172911335042534
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089508507091669864}
+  m_Enabled: 1
 --- !u!1 &7096738816360821680
 GameObject:
   m_ObjectHideFlags: 0

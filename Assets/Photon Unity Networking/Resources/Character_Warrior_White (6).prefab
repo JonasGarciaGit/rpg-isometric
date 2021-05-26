@@ -18993,6 +18993,7 @@ MonoBehaviour:
   dealSomeDamage: {fileID: 0}
   bloodPrefab: {fileID: 1407402442211574, guid: 5d31a5b9b348544439d8079453188ecc, type: 3}
   blackFade: {fileID: 7761851430063767421}
+  characterHpInfo: {fileID: 1157382736568762872}
 --- !u!114 &2661936138377868162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19009,6 +19010,7 @@ MonoBehaviour:
   currentExp: 0
   levelUpFX: {fileID: 4171970773990329986, guid: 15c4406698f780648bae6302e9b7cc5d, type: 3}
   level: {fileID: 2998345293677955470}
+  characterXpInfo: {fileID: 2493543161715313762}
 --- !u!114 &5349359743324606155
 MonoBehaviour:
   m_ObjectHideFlags: 0

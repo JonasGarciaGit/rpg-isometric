@@ -13,7 +13,7 @@ public class environmentMusicController : MonoBehaviour
     {
         audioSource.clip = music;
         audioSource.loop = true;
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,14 +24,13 @@ public class environmentMusicController : MonoBehaviour
             {
                 if (!audioSrc.name.Equals(this.gameObject.name))
                 {
-                    audioSrc.Stop();
-                    audioSrc.GetComponentInParent<environmentMusicController>().canPlay = false;
+                    StartCoroutine("stopGradualPlayerFalse", audioSrc);
                 }
             }
 
             if (!audioSource.isPlaying && other.gameObject.GetComponent<PhotonView>().isMine)
             {
-                audioSource.Play();
+                StartCoroutine("playGradual");
             }
         }
 
@@ -44,12 +43,12 @@ public class environmentMusicController : MonoBehaviour
         {
             foreach (var audioSrc in audioSourceList)
             {
-                audioSrc.GetComponentInParent<environmentMusicController>().canPlay = true;
+                StartCoroutine("stopGradualPlayerTrue", audioSrc);
             }
 
             if (audioSource.isPlaying && other.gameObject.GetComponent<PhotonView>().isMine)
             {
-                audioSource.Stop();
+                StartCoroutine("stopGradual");
             }
         }
     }
@@ -60,10 +59,80 @@ public class environmentMusicController : MonoBehaviour
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                StartCoroutine("playGradual");
             }
 
         }
+    }
+
+    IEnumerator playGradual()
+    {
+        audioSource.Play();
+        audioSource.volume = 0;
+        yield return new WaitForSeconds(1f);
+        audioSource.volume = 0.1f;
+        yield return new WaitForSeconds(1f);
+        audioSource.volume = 0.2f;
+        yield return new WaitForSeconds(1f);
+        audioSource.volume = 0.3f;
+        yield return new WaitForSeconds(1f);
+        audioSource.volume = 0.4f;
+        yield return new WaitForSeconds(1f);
+        audioSource.volume = 0.5f;
+
+    }
+
+    IEnumerator stopGradual()
+    {
+        audioSource.volume = 0.5f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.4f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.2f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.1f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.Stop();
+    }
+
+    IEnumerator stopGradualPlayerFalse(AudioSource src)
+    {
+        audioSource.volume = 0.5f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.4f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.2f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.1f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0f;
+        yield return new WaitForSeconds(0.5f);
+        src.Stop();
+        src.GetComponentInParent<environmentMusicController>().canPlay = false;
+    }
+
+    IEnumerator stopGradualPlayerTrue(AudioSource src)
+    {
+        audioSource.volume = 0.5f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.4f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.2f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0.1f;
+        yield return new WaitForSeconds(0.5f);
+        audioSource.volume = 0f;
+        yield return new WaitForSeconds(0.5f);
+        src.Stop();
+        src.GetComponentInParent<environmentMusicController>().canPlay = true;
     }
 
 

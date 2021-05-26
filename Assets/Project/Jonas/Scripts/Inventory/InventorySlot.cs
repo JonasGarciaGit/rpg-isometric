@@ -71,11 +71,14 @@ public class InventorySlot : MonoBehaviour
 
                 if (item.name.Equals("HpPotion"))
                 {
+                    int maxHealth = GetComponentInParent<PlayerHP>().maxHealth;
+                    int currentHealth = GetComponentInParent<PlayerHP>().currentHealth;
+                    double heal = maxHealth * 0.25;
 
-                    GetComponentInParent<PlayerHP>().ModifyHealth(25);
-                    if (GetComponentInParent<PlayerHP>().currentHealth > GetComponentInParent<PlayerHP>().maxHealth)
+                    GetComponentInParent<PlayerHP>().ModifyHealth(Mathf.RoundToInt((float) heal));
+                    if ( currentHealth > maxHealth)
                     {
-                        GetComponentInParent<PlayerHP>().currentHealth = GetComponentInParent<PlayerHP>().maxHealth;
+                        currentHealth = maxHealth;
                     }
 
                     Inventory.instance.Remove(item);
