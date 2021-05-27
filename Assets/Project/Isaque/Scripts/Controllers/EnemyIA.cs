@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +16,7 @@ public class EnemyIA : MonoBehaviour
 
     [SerializeField]
     private PhotonView photonView;
-    
+
     [SerializeField]
     Transform target;
     NavMeshAgent agent;
@@ -44,102 +43,109 @@ public class EnemyIA : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = this.gameObject.transform.parent.gameObject.transform;
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
-        attackCooldown = 1f;
-        isDie = false;
-        
+        if (photonView.isMine)
+        {
+            startPosition = this.gameObject.transform.parent.gameObject.transform;
+            //target = GameObject.FindGameObjectWithTag("Player").transform;
+            agent = GetComponent<NavMeshAgent>();
+            attackCooldown = 1f;
+            isDie = false;
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        try
+        if (photonView.isMine)
         {
-            if(target == null)
+
+            try
             {
-                seachTarget();
-            }
-
-        
-
-        if (monsterHealth.currentHealth <= 0)
-        {
-            isDie = true;
-            StartCoroutine("Die");
-        }
-
-        float distance = Vector3.Distance(target.position, transform.position);
-        
-        if (distance <= lookRadius && animator.GetBool("isAttkOne") == false && animator.GetBool("isAttkTwo") == false && isDie == false )
-        {
-
-                    photonView.RPC("ChasePlayer", PhotonTargets.AllBuffered, distance);       
-           
-        }
-        if(distance > lookRadius)
-        {
-                try
+                if (target == null)
                 {
-                    target = null;
-                    animator.SetBool("isWalking", true);
-                    agent.destination = startPosition.position;
+                    seachTarget();
+                }
 
-                    if(monsterHealth.currentHealth < monsterHealth.maxHealth)
+
+
+                if (monsterHealth.currentHealth <= 0)
+                {
+                    isDie = true;
+                    StartCoroutine("Die");
+                }
+
+                float distance = Vector3.Distance(target.position, transform.position);
+
+                if (distance <= lookRadius && animator.GetBool("isAttkOne") == false && animator.GetBool("isAttkTwo") == false && isDie == false)
+                {
+
+                    photonView.RPC("ChasePlayer", PhotonTargets.AllBuffered, distance);
+
+                }
+                if (distance > lookRadius)
+                {
+                    try
                     {
-                        monsterHealth.ModifyHealth(20);
-                        if(monsterHealth.currentHealth > monsterHealth.maxHealth)
+                        target = null;
+                        animator.SetBool("isWalking", true);
+                        agent.destination = startPosition.position;
+
+                        if (monsterHealth.currentHealth < monsterHealth.maxHealth)
                         {
-                            int adjustLife = monsterHealth.maxHealth - monsterHealth.currentHealth;
-                            monsterHealth.ModifyHealth(-adjustLife);
+                            monsterHealth.ModifyHealth(20);
+                            if (monsterHealth.currentHealth > monsterHealth.maxHealth)
+                            {
+                                int adjustLife = monsterHealth.maxHealth - monsterHealth.currentHealth;
+                                monsterHealth.ModifyHealth(-adjustLife);
+                            }
+
                         }
-                       
+
+                        if (agent.velocity.sqrMagnitude == 0f)
+                        {
+                            animator.SetBool("isWalking", false);
+                        }
                     }
-                    
-                    if (agent.velocity.sqrMagnitude == 0f)
+                    catch
                     {
-                        animator.SetBool("isWalking", false);
+
                     }
                 }
-                catch
+
+                //Attacking 
+
+                if (distance <= atkRadius)
                 {
+
+                    if (attackCooldown == 1f)
+                    {
+                        int attkType = Random.Range(0, 10);
+                        if (attkType <= 5)
+                        {
+                            StartCoroutine("attackOne");
+                            attackCooldown = 0f;
+                        }
+
+                        if (attkType > 5)
+                        {
+                            StartCoroutine("attackTwo");
+                            attackCooldown = 0f;
+                        }
+
+                    }
 
                 }
-        }
 
-        //Attacking 
-        
-        if(distance <= atkRadius)
-        {
-            
-            if(attackCooldown == 1f)
-            {
-                int attkType = Random.Range(0, 10);
-                if(attkType <= 5)
-                {
-                    StartCoroutine("attackOne");
-                    attackCooldown = 0f;
-                    }
 
-                if(attkType > 5)
-                {
-                    StartCoroutine("attackTwo");
-                    attackCooldown = 0f;
-                    }
-                
+
+
             }
-            
-        }
+            catch
+            {
 
-
-        
-
-        }
-        catch
-        {
-
+            }
         }
 
     }
@@ -156,7 +162,7 @@ public class EnemyIA : MonoBehaviour
     {
         try
         {
-            if(distance <= atkRadius && gameObject.tag.Equals("Witch"))
+            if (distance <= atkRadius && gameObject.tag.Equals("Witch"))
             {
                 //Fazer com que a bruxa olhe na direção do alvo
                 Vector3 lookVector = target.transform.position - transform.position;
@@ -201,9 +207,10 @@ public class EnemyIA : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, atkRadius);
     }
 
+
     IEnumerator attackOne()
     {
-        
+
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
         animator.SetBool("isAttkOne", true);
@@ -214,7 +221,7 @@ public class EnemyIA : MonoBehaviour
             Invoke("instatiateSkillOne", 1.37f);
         }
 
-            yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4f);
 
 
         agent.isStopped = false;
@@ -247,6 +254,7 @@ public class EnemyIA : MonoBehaviour
         agent.isStopped = false;
         animator.SetBool("isAttkTwo", false);
         animator.SetBool("isWalking", true);
+       
 
         yield return new WaitForSeconds(1f);
 
@@ -256,7 +264,7 @@ public class EnemyIA : MonoBehaviour
 
     IEnumerator Die()
     {
-        if(isDie == true)
+        if (isDie == true)
         {
 
             weaponDamage.weaponDamage = 0;
@@ -275,7 +283,7 @@ public class EnemyIA : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    
+
     private void seachTarget()
     {
         try
@@ -312,8 +320,10 @@ public class EnemyIA : MonoBehaviour
 
         GameObject skill = Instantiate(skillTwo, weaponDamage.myTransform.position, Quaternion.identity);
         AudioSource audioSrc = skill.AddComponent<AudioSource>();
-        audioSrc.minDistance = 2f;
-        audioSrc.maxDistance = 2.1f;
+        audioSrc.minDistance = 1f;
+        audioSrc.maxDistance = 10f;
+        audioSrc.spatialBlend = 1f;
+        audioSrc.rolloffMode = AudioRolloffMode.Linear;
         audioSrc.volume = 0.2f;
         audioSrc.clip = skillEffectsSound;
         audioSrc.Play();

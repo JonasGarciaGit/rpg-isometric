@@ -7,13 +7,12 @@ public class OrcSounds : MonoBehaviour
     public AudioClip attackingAudio;
     public AudioSource audioSource;
     public AudioClip deathAudio;
-    
 
     public void Attack()
     {
-        audioSource.volume = 0.5f;
-        audioSource.clip = attackingAudio;
-        audioSource.Play();
+            audioSource.volume = 0.5f;
+            audioSource.clip = attackingAudio;
+            audioSource.Play();
     }
 
     public void DieOrc()
@@ -21,5 +20,6 @@ public class OrcSounds : MonoBehaviour
             audioSource.volume = 0.5f;
             audioSource.clip = deathAudio;
             audioSource.Play();
+  
     }
 }

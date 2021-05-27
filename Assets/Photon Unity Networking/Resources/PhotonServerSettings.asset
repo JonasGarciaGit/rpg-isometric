@@ -16,7 +16,7 @@ MonoBehaviour:
   VoiceAppID: 
   ChatAppID: 
   HostType: 1
-  PreferredRegion: 0
+  PreferredRegion: 7
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -48,4 +48,6 @@ MonoBehaviour:
   - TaggedPlayer
   - checkAnotherPlayerAttack
   - seachTarget
+  - orcAttackRpc
+  - orcAttackTwoRpc
   DisableAutoOpenWizard: 1

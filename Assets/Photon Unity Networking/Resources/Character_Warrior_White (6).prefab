@@ -18702,6 +18702,7 @@ GameObject:
   - component: {fileID: 1383620577508750390}
   - component: {fileID: 10482611540673108}
   - component: {fileID: 4652005637142555009}
+  - component: {fileID: 4915878915282684614}
   m_Layer: 6
   m_Name: Character_Warrior_White (6)
   m_TagString: Player
@@ -18841,6 +18842,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 671944195472654372}
+  - {fileID: 3263071153962347434}
   - {fileID: 3263071153962347434}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
@@ -19106,6 +19108,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuInGame: {fileID: 571624202748033417}
+--- !u!81 &4915878915282684614
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772469182310804171}
+  m_Enabled: 0
 --- !u!1 &7809555347466915130
 GameObject:
   m_ObjectHideFlags: 0

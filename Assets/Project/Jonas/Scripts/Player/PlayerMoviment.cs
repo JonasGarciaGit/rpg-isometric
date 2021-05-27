@@ -52,14 +52,18 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     private string anotherPlayerNickname;
 
+    private AudioListener audioListener;
+
     private void Awake()
     {
+        audioListener = gameObject.GetComponent<AudioListener>();
         _input = GetComponent<InputHandler>();
 
         if (photonView.isMine)
         {
             camera.SetActive(true);
             weapon.SetActive(false);
+            audioListener.enabled = true;
 
             if (weaponTwo != null)
             {
