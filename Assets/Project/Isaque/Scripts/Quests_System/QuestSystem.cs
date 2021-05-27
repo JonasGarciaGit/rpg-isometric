@@ -108,6 +108,7 @@ public class QuestSystem : MonoBehaviour
                     isGatheringQuest = informations.isGatheringQuest;
                     npcVoice = informations.npcVoice;
                     audioSource = informations.npcAudio;
+                    canCompletedQuest = false;
 
                     if (isQuestForKill)
                     {
