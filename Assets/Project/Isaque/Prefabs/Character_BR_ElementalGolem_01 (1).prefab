@@ -610,11 +610,11 @@ GameObject:
   - component: {fileID: 5724591514228144023}
   - component: {fileID: 1004300493684796846}
   - component: {fileID: 2038405874079344454}
-  - component: {fileID: 4783839318741397756}
   - component: {fileID: 7692556944968995393}
   - component: {fileID: 688570996022881585}
   - component: {fileID: 5180431357260153798}
   - component: {fileID: 1522507690711346611}
+  - component: {fileID: 3102576479203743227}
   m_Layer: 0
   m_Name: Character_BR_ElementalGolem_01 (1)
   m_TagString: StoneGolem
@@ -832,34 +832,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: isDie
+  - Type: 4
+    SynchronizeType: 2
+    Name: isSpecial
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!114 &4783839318741397756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3101675950981920586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f13f324a3070274ea56065ee511388f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookRadius: 6
-  atkRadius: 3.5
-  monsterExp: 10000
-  photonView: {fileID: 5724591514228144023}
-  target: {fileID: 0}
-  animator: {fileID: 4255908803686398669}
-  startPosition: {fileID: 0}
-  monsterHealth: {fileID: 7692556944968995393}
-  weaponDamage: {fileID: 1821958527895296179}
-  skillOne: {fileID: 0}
-  skillTwo: {fileID: 0}
-  skillEffectsSound: {fileID: 0}
-  coinPrefab: {fileID: 1663164920024155306, guid: e8d36cc8eabf07241909ee3bf9cf7447, type: 3}
 --- !u!114 &7692556944968995393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +988,32 @@ MonoBehaviour:
   attackingAudio: {fileID: 8300000, guid: efa052ec7030a9e489a69c2e98517db1, type: 3}
   audioSource: {fileID: 5180431357260153798}
   deathAudio: {fileID: 8300000, guid: d425a1ba5e3359d4dbae8797acfcd0e5, type: 3}
+--- !u!114 &3102576479203743227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101675950981920586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99253050f571f0c4a8b316182fe8ccbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookRadius: 6
+  atkRadius: 3.5
+  monsterExp: 10000
+  canUseSpecial: 0
+  throwRock: {fileID: 3634527578553132048, guid: bfe4e8c2950464542a41868330eee2d1, type: 3}
+  impulseRockForce: 3
+  photonView: {fileID: 5724591514228144023}
+  target: {fileID: 0}
+  animator: {fileID: 4255908803686398669}
+  startPosition: {fileID: 0}
+  monsterHealth: {fileID: 7692556944968995393}
+  weaponDamage: {fileID: 1821958527895296179}
+  skillEffectsSound: {fileID: 0}
+  coinPrefab: {fileID: 1663164920024155306, guid: e8d36cc8eabf07241909ee3bf9cf7447, type: 3}
 --- !u!1 &3172902358110297464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1212,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1821958527895296179
 MonoBehaviour:
@@ -1783,7 +1787,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7705874321725568753
 MonoBehaviour:

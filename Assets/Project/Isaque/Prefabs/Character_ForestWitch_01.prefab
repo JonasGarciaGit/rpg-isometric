@@ -2837,7 +2837,7 @@ GameObject:
   - component: {fileID: 8923800660920731047}
   - component: {fileID: 5439741042073491602}
   - component: {fileID: 7232162288982545113}
-  - component: {fileID: 7323589660412312080}
+  - component: {fileID: 7925896314126564717}
   - component: {fileID: 8621243625986820689}
   - component: {fileID: 7841770328960673421}
   - component: {fileID: 7561994423345358443}
@@ -3077,7 +3077,7 @@ MonoBehaviour:
   dealSomeDamage: {fileID: 0}
   questSystem: {fileID: 0}
   bloodPrefab: {fileID: 1407402442211574, guid: 5d31a5b9b348544439d8079453188ecc, type: 3}
---- !u!114 &7323589660412312080
+--- !u!114 &7925896314126564717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3086,7 +3086,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9027201999281660904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f13f324a3070274ea56065ee511388f, type: 3}
+  m_Script: {fileID: 11500000, guid: 917af2fe598789946bcbccb3b0d86001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 8

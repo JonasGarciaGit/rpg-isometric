@@ -111,7 +111,7 @@ public class PlayerHP : MonoBehaviour
                         GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
                         Destroy(blood, 1f);
 
-                        if (!monsterAnimator.GetBool("isAttkTwo") == true)
+                        if (!monsterAnimator.GetBool("isAttkTwo") == true || dealSomeDamage.GetComponentInParent<Rigidbody>().gameObject.tag == "StoneGolem")
                         {
                             damageCooldown = 0f;
                         }
@@ -137,6 +137,22 @@ public class PlayerHP : MonoBehaviour
             GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
             Destroy(blood, 1f);
 
+        }
+
+        if(other.tag == "Rock")
+        {
+            dealSomeDamage = other.GetComponent<DealSomeDamage>();
+
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                return;
+            }
+
+            double realDamage = dealSomeDamage.weaponDamage - (defense * 0.1);
+            ModifyHealth(-Mathf.RoundToInt((float)realDamage));
+            GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
+            Destroy(blood, 1f);
         }
 
     }

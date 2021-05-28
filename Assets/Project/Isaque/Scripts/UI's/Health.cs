@@ -14,6 +14,10 @@ public class Health : MonoBehaviour
 
     private EnemyIA enemyIa;
 
+    private BossIA bossIa;
+
+    private WitchIA witchIa;
+
     private bool receiveExp = false;
 
     private bool weaponIsStay;
@@ -117,8 +121,31 @@ public class Health : MonoBehaviour
 
                     }
 
-                    enemyIa = GetComponentInParent<EnemyIA>();
-                    playerExp.ModifyExp(enemyIa.monsterExp);
+                    try
+                    {
+                        enemyIa = GetComponentInParent<EnemyIA>();
+                        bossIa = GetComponentInParent<BossIA>();
+                        witchIa = GetComponentInParent<WitchIA>();
+                    }
+                    catch
+                    {
+
+                    }
+                  
+                    if(this.gameObject.tag == "StoneGolem")
+                    {
+                        playerExp.ModifyExp(bossIa.monsterExp);
+
+                    }else if(this.gameObject.tag == "Witch")
+                    {
+                        playerExp.ModifyExp(witchIa.monsterExp);
+                    }
+                    else
+                    {
+                        playerExp.ModifyExp(enemyIa.monsterExp);
+                    }
+
+                    
                     receiveExp = true;
                     
                 }

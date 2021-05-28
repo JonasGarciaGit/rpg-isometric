@@ -46,7 +46,6 @@ public class EnemyIA : MonoBehaviour
         if (photonView.isMine)
         {
             startPosition = this.gameObject.transform.parent.gameObject.transform;
-            //target = GameObject.FindGameObjectWithTag("Player").transform;
             agent = GetComponent<NavMeshAgent>();
             attackCooldown = 1f;
             isDie = false;

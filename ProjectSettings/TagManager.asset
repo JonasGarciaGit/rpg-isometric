@@ -23,6 +23,7 @@ TagManager:
   - postLamp
   - Ogre
   - ground
+  - Rock
   layers:
   - Default
   - TransparentFX
