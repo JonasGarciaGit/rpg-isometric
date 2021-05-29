@@ -340,7 +340,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
         this.moveSpeed = 0f;
         isAttacking = true;
         photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(characterClass.Equals("Thief") ? 0.6f : 1f);
         isAttacking = false;
         photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         animator.SetBool("isAttacking", false);
@@ -374,7 +374,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
         this.moveSpeed = 0f;
         isAttacking = true;
         photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
-        yield return new WaitForSeconds(characterClass.Equals("Warrior") ? 1.5f : characterClass.Equals("Knight") ? 2f : characterClass.Equals("Viking") ? 2.5f : 1.5f);
+        yield return new WaitForSeconds(characterClass.Equals("Warrior") ? 1.3f : characterClass.Equals("Knight") ? 1f : characterClass.Equals("Viking") ? 1f : 1.1f);
         isAttacking = false;
         photonView.RPC("checkAnotherPlayerAttack", PhotonTargets.AllBuffered, isAttacking, photonView.owner.NickName);
         animator.SetBool("isAttackingHeavying", false);
