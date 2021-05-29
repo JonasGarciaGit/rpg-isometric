@@ -16,7 +16,7 @@ MonoBehaviour:
   VoiceAppID: 
   ChatAppID: 
   HostType: 1
-  PreferredRegion: 7
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -30,6 +30,7 @@ MonoBehaviour:
   RpcList:
   - ChasePlayer
   - Chat
+  - checkAnotherPlayerAttack
   - ColorRpc
   - DestroyRpc
   - DoJump
@@ -46,8 +47,4 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
-  - checkAnotherPlayerAttack
-  - seachTarget
-  - orcAttackRpc
-  - orcAttackTwoRpc
   DisableAutoOpenWizard: 1

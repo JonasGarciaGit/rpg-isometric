@@ -298,7 +298,7 @@ public class WitchIA : MonoBehaviour
 
     }
 
-    [PunRPC]
+
     public void instatiateSkillOne()
     {
 
@@ -315,7 +315,6 @@ public class WitchIA : MonoBehaviour
         Destroy(skill, 5f);
     }
 
-    [PunRPC]
     public void instatiateSkillTwo()
     {
 
