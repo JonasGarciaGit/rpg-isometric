@@ -86,7 +86,11 @@ public class Health : MonoBehaviour
                     GameObject blood = Instantiate(bloodPrefab, this.gameObject.transform.position, Quaternion.identity);
                     Destroy(blood, 1f);
 
-                    damageCooldown = 0f;
+                    if(!playerAnimator.GetBool("isAttackingHeavying"))
+                    {
+                        damageCooldown = 0f;
+                    }
+                    
                 }
 
             }
