@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Jonas/Scenes/GameScenes/Menu.unity
     guid: e120d0e37ab427a4cb1c20085b85c472
+  - enabled: 0
+    path: Assets/Project/Isaque/Scenes/Intro/loadScene.unity
+    guid: 0503cc56ac3155a499481a6b4541b81a
   - enabled: 1
     path: Assets/Project/Isaque/Scenes/Map.unity
     guid: 53e83d65b3c2aaa449a4e4284e938f10
   - enabled: 0
-    path: Assets/Project/Isaque/Scenes/Isaque_Map_Teste/Isaque-Map.unity
-    guid: 5b3a0c174c81d1445bddaf3584683863
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
