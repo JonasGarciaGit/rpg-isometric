@@ -3769,6 +3769,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 930851117886169157}
     m_Modifications:
+    - target: {fileID: 7317022690594775696, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7317022690594775698, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_text
       value: 'Orc
@@ -3778,6 +3782,10 @@ PrefabInstance:
     - target: {fileID: 7317022691415400061, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317022691415400061, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7317022691415400062, guid: 7c7083d531491634090d68e07ca759cd, type: 3}
       propertyPath: m_Pivot.x

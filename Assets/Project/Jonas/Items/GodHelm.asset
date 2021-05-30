@@ -17,5 +17,5 @@ MonoBehaviour:
   price: 2500
   isDefaultItem: 0
   category: helm
-  defense: 120
+  defense: 40
   attack: 0

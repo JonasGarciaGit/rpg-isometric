@@ -220,7 +220,7 @@ public class EnemyIA : MonoBehaviour
             Invoke("instatiateSkillOne", 1.37f);
         }
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
 
         agent.isStopped = false;
@@ -247,7 +247,7 @@ public class EnemyIA : MonoBehaviour
             Invoke("instatiateSkillTwo", 1f);
         }
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3.5f);
 
 
         agent.isStopped = false;
