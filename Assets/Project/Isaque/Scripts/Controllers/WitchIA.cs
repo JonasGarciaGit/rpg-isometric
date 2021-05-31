@@ -41,20 +41,24 @@ public class WitchIA : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (photonView.isMine)
-        {
+
             startPosition = this.gameObject.transform.parent.gameObject.transform;
             agent = GetComponent<NavMeshAgent>();
             attackCooldown = 1f;
             isDie = false;
-        }
-
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (monsterHealth.currentHealth <= 0)
+        {
+            isDie = true;
+            StartCoroutine("Die");
+        }
+
         if (photonView.isMine)
         {
 
@@ -63,14 +67,6 @@ public class WitchIA : MonoBehaviour
                 if (target == null)
                 {
                     seachTarget();
-                }
-
-
-
-                if (monsterHealth.currentHealth <= 0)
-                {
-                    isDie = true;
-                    StartCoroutine("Die");
                 }
 
                 float distance = Vector3.Distance(target.position, transform.position);

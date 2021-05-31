@@ -43,20 +43,21 @@ public class BossIA : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (photonView.isMine)
-        {
             startPosition = this.gameObject.transform.parent.gameObject.transform;
             agent = GetComponent<NavMeshAgent>();
             attackCooldown = 1f;
             isDie = false;
-        }
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (monsterHealth.currentHealth <= 0)
+        {
+            isDie = true;
+            StartCoroutine("Die");
+        }
+
         if (photonView.isMine)
         {
 
@@ -66,14 +67,7 @@ public class BossIA : MonoBehaviour
                 {
                     seachTarget();
                 }
-
-
-
-                if (monsterHealth.currentHealth <= 0)
-                {
-                    isDie = true;
-                    StartCoroutine("Die");
-                }
+      
 
                 if(monsterHealth.currentHealth <= (monsterHealth.maxHealth - (monsterHealth.maxHealth / 4)) && !specials.Contains("specialOne"))
                 {
