@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerPrefabWarrior;
     public GameObject PlayerPrefabViking;
     public GameObject PlayerPrefabThief;
+    public GameObject crow;
     public GameObject SceneCamera;
 
 

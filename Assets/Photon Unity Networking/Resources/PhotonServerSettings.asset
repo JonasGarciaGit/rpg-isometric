@@ -47,4 +47,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - ChaseQuestObjective
   DisableAutoOpenWizard: 1

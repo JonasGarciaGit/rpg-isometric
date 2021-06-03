@@ -16,10 +16,11 @@ public class QuestSystem : MonoBehaviour
     public TextMeshProUGUI newQuestInstructionsUI;
     public string basicIntruction;
     public string rewardQuest;
+    public bool crowFollowQuest = false;
 
     public List<string> questsLines = new List<string>();
 
-    QuestInformation informations;
+    public QuestInformation informations;
 
     public bool haveQuest = false;
 
@@ -56,7 +57,6 @@ public class QuestSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(canCompletedQuest == true && Input.GetKeyDown(KeyCode.F) && haveQuest == true)
         {
             haveQuest = false;
@@ -201,5 +201,17 @@ public class QuestSystem : MonoBehaviour
             GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 + 50, 200, 30), "Press 'F' to talk");
         }
 
+    }
+
+    public void FollowQuest()
+    {
+        if(crowFollowQuest == false)
+        {
+            crowFollowQuest = true;
+        }
+        else
+        {
+            crowFollowQuest = false;
+        }
     }
 }
