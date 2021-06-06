@@ -36,6 +36,8 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
     public Text characterName;
 
+    public Text roomCode;
+
     public float jumpForce = 2.0f;
 
     public Vector3 jump;
@@ -75,7 +77,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
             nickname.text = photonView.owner.NickName;
             characterName.text = photonView.owner.NickName;
-
+            roomCode.text = "Room code: " +PhotonNetwork.room.Name;
         }
 
         if (!photonView.isMine)
@@ -168,7 +170,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
 
             }
 
-            if (Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true
+            if (Input.GetKey(KeyCode.LeftShift) && animator.GetBool("isGrounded") == true
                 && animator.GetBool("isRunning") == false
                 && animator.GetBool("isAttacking") == false
                 && animator.GetBool("isAttackingHeavying") == false)
@@ -203,7 +205,7 @@ public class PlayerMoviment : Photon.MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (Input.GetKey(KeyCode.X) && animator.GetBool("isGrounded") == true
+        if (Input.GetKey(KeyCode.LeftShift) && animator.GetBool("isGrounded") == true
             && animator.GetBool("isRunning") == true
             && animator.GetBool("isAttacking") == false
             && animator.GetBool("isAttackingHeavying") == false)
