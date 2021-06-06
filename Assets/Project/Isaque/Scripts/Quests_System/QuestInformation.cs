@@ -14,6 +14,7 @@ public class QuestInformation : MonoBehaviour
     public string newInstructionsQuest;
     public string questLine;
     public string objective;
+    public int rankExp;
     public AudioClip npcVoice;
     public AudioSource npcAudio;
     
@@ -48,6 +49,7 @@ public class QuestInformation : MonoBehaviour
             newInstructionsQuest = newQuest.newInstructionsQuest;
             questLine = newQuest.questLine;
             objective = newQuest.objective;
+            rankExp = newQuest.rankExp;
 
             killEnemies = newQuest.killEnemies;
             typeEnemies = newQuest.typeEnemies;

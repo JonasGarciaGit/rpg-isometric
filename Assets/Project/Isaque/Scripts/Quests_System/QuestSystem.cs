@@ -16,11 +16,14 @@ public class QuestSystem : MonoBehaviour
     public TextMeshProUGUI newQuestInstructionsUI;
     public string basicIntruction;
     public string rewardQuest;
+    public int rankExp;
     public bool crowFollowQuest = false;
 
     public List<string> questsLines = new List<string>();
 
     public QuestInformation informations;
+
+    public PlayerRank playerRank;
 
     public bool haveQuest = false;
 
@@ -51,7 +54,7 @@ public class QuestSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRank = GetComponentInParent<PlayerRank>();
     }
 
     // Update is called once per frame
@@ -60,6 +63,7 @@ public class QuestSystem : MonoBehaviour
         if(canCompletedQuest == true && Input.GetKeyDown(KeyCode.F) && haveQuest == true)
         {
             haveQuest = false;
+            playerRank.ModifyRankExp(rankExp);
             newQuestInstructionsUI.text = "";
             coinInInventory.text = (int.Parse(coinInInventory.text) + int.Parse(rewardQuest)).ToString();
             coinAnimation.text = rewardQuest + " Coins!";
@@ -67,6 +71,7 @@ public class QuestSystem : MonoBehaviour
             coinAnimation.enabled = true;
             canCompletedQuest = false;
             informations.completed = true;
+            
             StartCoroutine("waitForSecondsFunc");
             
         }
@@ -173,6 +178,7 @@ public class QuestSystem : MonoBehaviour
         newQuestInstructionsUI.text = (isQuestForKill) ? informations.newInstructionsQuest + " - " + countEnemiesDead + " Enemies left" : informations.newInstructionsQuest;
         questsLines.Add(informations.questLine);
         rewardQuest = informations.valueInCoins;
+        rankExp = informations.rankExp;
         haveQuest = true;
     }
 
