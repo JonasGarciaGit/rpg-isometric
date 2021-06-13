@@ -36,9 +36,9 @@ public class FadeInOut : MonoBehaviour
 
     IEnumerator canFadeIn()
     {
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(4f);
         FadeInImage();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         canStartGame = true;
     }
 
