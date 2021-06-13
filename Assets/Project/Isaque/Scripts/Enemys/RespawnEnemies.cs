@@ -14,6 +14,8 @@ public class RespawnEnemies : MonoBehaviour
     [SerializeField]
     private int cooldown;
 
+    private int tempViewId;
+
     private float timer;
 
 
@@ -25,6 +27,7 @@ public class RespawnEnemies : MonoBehaviour
         {
             respawn = this.gameObject;
             monster = respawn.transform.GetChild(0).gameObject;
+            tempViewId = monster.GetComponent<PhotonView>().photonView.viewID;
         }
         catch (Exception e)
         {
@@ -47,6 +50,7 @@ public class RespawnEnemies : MonoBehaviour
             timer = 0;
             GameObject child = Instantiate(prefabMonster, this.gameObject.transform.position, Quaternion.identity);
             child.transform.parent = respawn.transform;
+            child.GetComponent<PhotonView>().viewID = tempViewId;
             monster = respawn.transform.GetChild(0).gameObject;
         }
     }

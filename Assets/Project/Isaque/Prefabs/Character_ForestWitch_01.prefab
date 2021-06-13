@@ -3072,7 +3072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eed38bb669c09147ac7d4d11438e1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100
   currentHealth: 0
   dealSomeDamage: {fileID: 0}
   questSystem: {fileID: 0}
